@@ -25,122 +25,38 @@
         </div>
         <div class="col-md-5">
             <h2>Add a Dog</h2>
-            {{!-- <div class="accordion" id="accordionExample">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne">
-                                Add a Dog
-                            </button>
-                        </h2>
-                    </div>
-
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                        data-parent="#accordionExample">
-                        <div class="card-body">
-                            <form class="signup">
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label for="inputDogName">Name</label>
-                                        <input type="text" class="form-control" id="first-name-input"
-                                            placeholder="First name" autofocus>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label for="inputDogAge">Age</label>
-                                        <input type="text" class="form-control" id="first-name-input" placeholder="Age"
-                                            autofocus>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label for="inputDogBreed">Breed</label>
-                                        <input type="text" class="form-control" id="first-name-input"
-                                            placeholder="Breed" autofocus>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label for="inputDogWeight">Weight</label>
-                                        <input type="text" class="form-control" id="first-name-input"
-                                            placeholder="Weight" autofocus>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label for="inputDogWalker">Dog Walker</label>
-                                        <select class="custom-select">
-
-                                            <option selected>Dog Walker</option>
-                                            <option value="1">Have this dynamically generate?</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                    <span class="sr-only">Error:</span> <span class="msg"></span>
-                                </div>
-                                <button type="submit" class="btn btn-default">Add Dog</button>
-                            </form>
-                        </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <h2>Tell us about your dog.</h2>
+                        <form class="dog-form">
+                            <div class="form-group">
+                                <label for="dog-name">Name</label>
+                                <input type="text" class="form-control" id="dog-name" placeholder="Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="dog-breed">Breed</label>
+                                <input type="text" class="form-control" id="dog-breed" placeholder="Breed">
+                            </div>
+                            <div class="form-group">
+                                <label for="dog-age">Age</label>
+                                <input type="text" class="form-control" id="dog-age" placeholder="Age">
+                            </div>
+                            <div class="form-group">
+                                <label for="dog-sex">Sex</label>
+                                <input type="text" class="form-control" id="dog-sex" placeholder="Sex">
+                            </div>
+                            <div class="form-group">
+                                <label for="dog-weight">Breed</label>
+                                <input type="text" class="form-control" id="dog-weight" placeholder="Weight">
+                            </div>
+                            <button type="submit" id="dogFormSubmit" class="btn btn-default">Submit</button>
+                        </form>
+                        <br />
+                        <p><a href="/">Cancel</a></p>
                     </div>
                 </div>
-            </div> --}}
-            <form class="signup">
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="inputDogName">Name</label>
-                        <input type="text" class="form-control" id="dog-name-input" placeholder="First name"
-                            autofocus>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="inputDogAge">Age</label>
-                        <input type="text" class="form-control" id="dog-age-input" placeholder="Age" autofocus>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="inputDogBreed">Breed</label>
-                        <input type="text" class="form-control" id="dog-breed-input" placeholder="Breed" autofocus>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="inputDogWeight">Weight</label>
-                        <input type="text" class="form-control" id="dog-weight-input" placeholder="Weight" autofocus>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="inputDogWeight">Gender</label>
-                        <input type="text" class="form-control" id="dog-gender-input" placeholder="gender" autofocus>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="inputDogWalker">Dog Walker</label>
-                        <select class="custom-select">
-
-                            <option selected>Dog Walker</option>
-                            <option value="1">Have this dynamically generate?</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                    </div>
-                </div>
-                <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    <span class="sr-only">Error:</span> <span class="msg"></span>
-                </div>
-                <button type="submit" class="btn btn-default">Add Dog</button>
-            </form>
-        </div>
+            </div>
     </div>
 </div>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
