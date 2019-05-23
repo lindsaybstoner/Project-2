@@ -36,6 +36,12 @@
 </div>
 <br>
 <br>
+{{!-- Store walk in database --}}
+<div id="submit-walk-conatiner">
+  <button id="submit-walk" type="button" class="btn btn-info btn-lg">Submit Walk</button>
+</div>
+<br>
+<br>
 <div id="map-container">
   <h2>Activity Map</h2>
   <h3>buttons or icons</h3>
@@ -56,6 +62,11 @@
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZlJZI6QLG4nL7RtUntrZdjXqhoLd7UF4">
 </script>
 <script type="text/javascript">
+
+  // Global variables
+  let convertedTime = 0;
+  //const activityArray = [["Alice Pizza", 39.948332, -75.166127], ["&pizza", 39.949206712438, -75.1659201061516], ["Zavino", 39.950217, -75.162135], ["Joe's Pizza", 39.950392, -75.167560], ["Pizzeria Vetri", 39.9494108300057, -75.1686977423011]];
+  const activityArray = []; //["purple", 39.9465588, -75.167374]
 
   // Handle on click events
   window.onload = function () {
@@ -104,7 +115,7 @@
   const count = () => {
     time++;
 
-    let convertedTime = timeConverter(time)
+    convertedTime = timeConverter(time)
     // Display time
     $("#display-timer").text(convertedTime)
   };
@@ -160,9 +171,6 @@
 
 
   // Map code
-  //const activityArray = [["Alice Pizza", 39.948332, -75.166127], ["&pizza", 39.949206712438, -75.1659201061516], ["Zavino", 39.950217, -75.162135], ["Joe's Pizza", 39.950392, -75.167560], ["Pizzeria Vetri", 39.9494108300057, -75.1686977423011]];
-  const activityArray = []; //["purple", 39.9465588, -75.167374]
-
   function initMap() {
     let markers = [];
     let infowindow = new google.maps.InfoWindow({});
@@ -210,7 +218,7 @@
     setTimeout(() => {
       console.log(activityArray)
       initMap()
-    }, 500)
+    }, 1000)
   });
 
   $("#green").on("click", function () {
@@ -226,7 +234,7 @@
     setTimeout(() => {
       console.log(activityArray)
       initMap()
-    }, 500)
+    }, 1000)
   });
 
   $("#blue").on("click", function () {
@@ -242,7 +250,7 @@
     setTimeout(() => {
       console.log(activityArray)
       initMap()
-    }, 500)
+    }, 1000)
   });
 
   $("#yellow").on("click", function () {
@@ -258,7 +266,31 @@
     setTimeout(() => {
       console.log(activityArray)
       initMap()
-    }, 500)
+    }, 1000)
   });
+
+  // store walk details
+  $("#submit-walk").on("click", function (event) {
+    event.preventDefault();
+    console.log("submit walk")
+    let walkTime = convertedTime;
+    let walkActivity = activityArray;
+
+    // Walk Object
+    let addWalk = {
+      time: walkTime,
+      activity: walkActivity
+    };
+    console.log(addWalk)
+
+    // AJAX POST
+    $.ajax("/api/walks", {
+      type: "POST",
+      data: addWalk
+    }, function () {
+      console.log("walk added")
+    })
+  });
+
 
 </script>

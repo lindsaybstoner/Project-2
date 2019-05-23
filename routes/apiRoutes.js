@@ -83,4 +83,21 @@ module.exports = function (app) {
       });
     }
   });
+
+  // Dog Walk POST Route
+  app.post("/api/walks", function (req, res) {
+    console.log("Post walk api", req.body);
+    db.Walk.create({
+      time: req.body.time,
+      activity: req.body.activity
+    })
+      .then(function (results) {
+        res.json(results);
+      })
+      .catch(function (err) {
+        console.log(err);
+        res.json(err);
+        // res.status(422).json(err.errors[0].message);
+      });
+  });
 };
