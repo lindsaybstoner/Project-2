@@ -1,0 +1,264 @@
+<head>
+  <style>
+    #map {
+      margin: auto;
+      height: 500px;
+      width: 60%;
+    }
+  </style>
+</head>
+
+<h1>Walk Dog Page</h1>
+
+{{!-- User Data --}}
+{{#if userId}}
+<h2>User Info</h2>
+<h4>First Name: {{userFirstName}}</h4>
+<h4>User ID: {{userId}}</h4>
+<h4>User Email: {{userEmail}}</h4>
+{{else}}
+<p>Not logged-in <a href='/'>Log In</a></p>
+{{/if}}
+
+<br>
+<div id="timer-container">
+  <h2>Walking Timer</h2>
+
+  <div id="display-timer">00:00</div>
+
+  <div id="timer-buttons-container">
+    <button id="start">Start</button>
+    <button id="pause">Pause</button>
+    <button id="stop">Stop</button>
+    <button id="reset">Reset</button>
+    {{!-- <button id="mark">Mark</button> --}}
+  </div>
+</div>
+<br>
+<br>
+<div id="map-container">
+  <h2>Activity Map</h2>
+  <h3>buttons or icons</h3>
+  <div id="activity-buttons-container">
+    <button id="red" type="button" class="btn btn-danger">Red</button>
+    <button id="green" type="button" class="btn btn-success">Green</button>
+    <button id="blue" type="button" class="btn btn-primary">Blue</button>
+    <button id="yellow" type="button" class="btn btn-warning">Yellow</button>
+  </div>
+  <br>
+  <!--The div element for displaying the map -->
+  <div id="map"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{{!-- Put JavaScript code on separate file --}}
+{{!-- <script type="text/javascript" src="js/signup.js"></script> --}}
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZlJZI6QLG4nL7RtUntrZdjXqhoLd7UF4">
+</script>
+<script type="text/javascript">
+
+  // Handle on click events
+  window.onload = function () {
+    $("#start").on("click", start);
+    $("#pause").on("click", pause);
+    $("#stop").on("click", stop);
+    $("#reset").on("click", reset);
+  };
+
+  let intervalId;
+  let clockRunnig = false;
+  let time = 0;
+
+  // Start function
+  const start = () => {
+    if (!clockRunnig) {
+      intervalId = setInterval(count, 1000)
+      clockRunnig = true;
+    }
+  };
+
+  // Pause function
+  const pause = () => {
+    clearInterval(intervalId);
+    clockRunnig = false;
+  };
+
+  // Stop function
+  const stop = () => {
+    clearInterval(intervalId);
+    clockRunnig = false;
+
+    // Store stopwatch time
+    let walkTime = time;
+    console.log('walk time', walkTime)
+  };
+
+  // Reset function
+  const reset = () => {
+    time = 0;
+    // Update display
+    $("#display-timer").text("00:00")
+  };
+
+  // Count time
+  const count = () => {
+    time++;
+
+    let convertedTime = timeConverter(time)
+    // Display time
+    $("#display-timer").text(convertedTime)
+  };
+
+  // Time converter 
+  const timeConverter = (time) => {
+    let minutes = Math.floor(time / 60);
+    let seconds = time - (minutes * 60);
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    };
+    if (minutes === 0) {
+      minutes = "00";
+    }
+    else if (minutes < 10) {
+      minutes = "0" + minutes;
+    };
+    return minutes + ":" + seconds;
+  };
+
+  // Get latitude and longitude
+  const getCoordinates = (cb) => {
+    // HTML5 geolocation
+    console.log('run getCoordinates function')
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        cb(pos)
+        return pos;
+        //infoWindow.setPosition(pos);
+        //infoWindow.setContent('Location found.');
+        //infoWindow.open(map);
+        //map.setCenter(pos);
+      }, function () {
+        handleLocationError(true, infoWindow, map.getCenter());
+      });
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      infoWindow.setPosition(pos);
+      infoWindow.setContent(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
+      infoWindow.open(map);
+    }
+  };
+
+
+  // Map code
+  //const activityArray = [["Alice Pizza", 39.948332, -75.166127], ["&pizza", 39.949206712438, -75.1659201061516], ["Zavino", 39.950217, -75.162135], ["Joe's Pizza", 39.950392, -75.167560], ["Pizzeria Vetri", 39.9494108300057, -75.1686977423011]];
+  const activityArray = []; //["purple", 39.9465588, -75.167374]
+
+  function initMap() {
+    let markers = [];
+    let infowindow = new google.maps.InfoWindow({});
+
+    map = new google.maps.Map(document.getElementById('map'), {});
+
+    // Create the viewpoint property
+    let bounds = new google.maps.LatLngBounds();
+
+    // Loop through the activity array - add markers to the map
+    for (let i = 0; i < activityArray.length; i++) {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(activityArray[i][1], activityArray[i][2]),
+        map: map,
+        title: activityArray[i][0],
+        icon: `/assets/${activityArray[i][0]}-dot.png`,
+        animation: google.maps.Animation.DROP
+      });
+      // For each marker - add an event listener to display the title when someone clicks on the marker
+      google.maps.event.addListener(marker, 'click', ((marker, i) => {
+        return function (event) {
+
+          infowindow.setContent(activityArray[i][0]);
+          infowindow.open(map, marker)
+        }
+      })(marker, i))
+      // take each maker position to add coordinates to the bounds property
+      bounds.extend(marker.position);
+    }
+    // Set the viewpoint based on the give data
+    map.fitBounds(bounds, 50)
+  };
+
+  // Activity buttons code
+  $("#red").on("click", function () {
+    console.log("on click red")
+    // Invoke getCoordinates;
+    getCoordinates(function (result) {
+      console.log(result)
+      let lat = result.lat;
+      let lng = result.lng;
+      console.log(lat, lng);
+      activityArray.push(["red", lat, lng])
+    });
+    setTimeout(() => {
+      console.log(activityArray)
+      initMap()
+    }, 500)
+  });
+
+  $("#green").on("click", function () {
+    console.log("on click red")
+    // Invoke getCoordinates;
+    getCoordinates(function (result) {
+      console.log(result)
+      let lat = result.lat;
+      let lng = result.lng;
+      console.log(lat, lng);
+      activityArray.push(["beachflag", lat, lng])
+    })
+    setTimeout(() => {
+      console.log(activityArray)
+      initMap()
+    }, 500)
+  });
+
+  $("#blue").on("click", function () {
+    console.log("on click red")
+    // Invoke getCoordinates;
+    getCoordinates(function (result) {
+      console.log(result)
+      let lat = result.lat;
+      let lng = result.lng;
+      console.log(lat, lng);
+      activityArray.push(["blue", lat, lng])
+    })
+    setTimeout(() => {
+      console.log(activityArray)
+      initMap()
+    }, 500)
+  });
+
+  $("#yellow").on("click", function () {
+    console.log("on click red")
+    // Invoke getCoordinates;
+    getCoordinates(function (result) {
+      console.log(result)
+      let lat = result.lat;
+      let lng = result.lng;
+      console.log(lat, lng);
+      activityArray.push(["yellow", lat, lng]);
+    })
+    setTimeout(() => {
+      console.log(activityArray)
+      initMap()
+    }, 500)
+  });
+
+</script>
