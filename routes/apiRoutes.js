@@ -86,10 +86,12 @@ module.exports = function (app) {
 
   // Dog Walk POST Route
   app.post("/api/walks", function (req, res) {
-    console.log("Post walk api", req.body);
+    console.log(req.body);
+    console.log(req.body.activity);
+    console.log(req.body["activity[0][]"]);
     db.Walk.create({
       time: req.body.time,
-      activity: req.body.activity
+      activity: JSON.stringify(req.body.activity)
     })
       .then(function (results) {
         res.json(results);

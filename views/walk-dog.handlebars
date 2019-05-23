@@ -65,7 +65,7 @@
 
   // Global variables
   let convertedTime = 0;
-  //const activityArray = [["Alice Pizza", 39.948332, -75.166127], ["&pizza", 39.949206712438, -75.1659201061516], ["Zavino", 39.950217, -75.162135], ["Joe's Pizza", 39.950392, -75.167560], ["Pizzeria Vetri", 39.9494108300057, -75.1686977423011]];
+  //const activityArray = [["red", 39.948332, -75.166127], ["blue", 39.949206712438, -75.1659201061516], ["green", 39.950217, -75.162135], ["blue", 39.950392, -75.167560], ["red", 39.9494108300057, -75.1686977423011]];
   const activityArray = []; //["purple", 39.9465588, -75.167374]
 
   // Handle on click events
@@ -137,7 +137,7 @@
   };
 
   // Get latitude and longitude
-  const getCoordinates = (cb) => {
+  const getCoordinates = (color, cb) => {
     // HTML5 geolocation
     console.log('run getCoordinates function')
     if (navigator.geolocation) {
@@ -146,7 +146,10 @@
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
-        cb(pos)
+        console.log(pos.lat, pos.lng);
+        activityArray.push([color, pos.lat, pos.lng])
+        initMap();
+
         return pos;
         //infoWindow.setPosition(pos);
         //infoWindow.setContent('Location found.');
@@ -208,65 +211,26 @@
   $("#red").on("click", function () {
     console.log("on click red")
     // Invoke getCoordinates;
-    getCoordinates(function (result) {
-      console.log(result)
-      let lat = result.lat;
-      let lng = result.lng;
-      console.log(lat, lng);
-      activityArray.push(["red", lat, lng])
-    });
-    setTimeout(() => {
-      console.log(activityArray)
-      initMap()
-    }, 1000)
+    getCoordinates("red");
+
   });
 
   $("#green").on("click", function () {
     console.log("on click red")
     // Invoke getCoordinates;
-    getCoordinates(function (result) {
-      console.log(result)
-      let lat = result.lat;
-      let lng = result.lng;
-      console.log(lat, lng);
-      activityArray.push(["beachflag", lat, lng])
-    })
-    setTimeout(() => {
-      console.log(activityArray)
-      initMap()
-    }, 1000)
+    getCoordinates("green")
   });
 
   $("#blue").on("click", function () {
     console.log("on click red")
     // Invoke getCoordinates;
-    getCoordinates(function (result) {
-      console.log(result)
-      let lat = result.lat;
-      let lng = result.lng;
-      console.log(lat, lng);
-      activityArray.push(["blue", lat, lng])
-    })
-    setTimeout(() => {
-      console.log(activityArray)
-      initMap()
-    }, 1000)
+    getCoordinates("blue")
   });
 
   $("#yellow").on("click", function () {
     console.log("on click red")
     // Invoke getCoordinates;
-    getCoordinates(function (result) {
-      console.log(result)
-      let lat = result.lat;
-      let lng = result.lng;
-      console.log(lat, lng);
-      activityArray.push(["yellow", lat, lng]);
-    })
-    setTimeout(() => {
-      console.log(activityArray)
-      initMap()
-    }, 1000)
+    getCoordinates("beachflag")
   });
 
   // store walk details
@@ -275,6 +239,15 @@
     console.log("submit walk")
     let walkTime = convertedTime;
     let walkActivity = activityArray;
+    const activities = [
+      {
+        type: 'red',
+        lat: 123,
+        lng: 345
+      },
+      {
+        type: 'blue'
+      }]
 
     // Walk Object
     let addWalk = {
