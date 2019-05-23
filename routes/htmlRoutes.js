@@ -54,6 +54,20 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/dog-owner-login.html"));
   });
 
+  // Dog walk page
+  app.get("/walks", function(req, res) {
+    res.render("walks", {
+      msg: "Walks"
+    });
+  });
+
+   // How to add a new walk page
+   app.get("/new-walk", function(req, res) {
+    res.render("new-walk", {
+      msg: "New Walk"
+    });
+  });
+
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/dog-owner", isAuthenticated, function(req, res) {

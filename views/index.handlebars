@@ -1,45 +1,22 @@
-<div id="home">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>Dog Walking App Landing Page</h2>
-        <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text"
-              placeholder="Enter Example Text">
-          </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description"
-              placeholder="Enter Example Description"></textarea>
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
-          <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
+{{!-- <canvas id="canvas"></canvas> --}}
+<h1>Welcome to Dog App</h1>
+
+<div id="home" class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <h1><i class="fas fa-dog"></i></h1>
+      <div class="userOptions">
+        <h3>First Time Here?</h3>
+        <a href="/dog-owner-signup"><button type="button" class="btn btn-outline-light"><strong>Dog Owner
+              Signup</strong> <i class="fas fa-user-plus leftspace"></i></button></a>
+        <h3>Back Again?</h3>
+        <a href="/dog-owner-login"><button type="button" class="btn btn-outline-light leftspace"><strong>Dog Owner Login</strong>
+            <i class="fas fa-user"></i></button></a>
       </div>
     </div>
   </div>
-
-  <br>
-  <h1 style="text-align: center">Above Form From Project-2 Template (can be removed)</h1>
-  <br>
-  <br>
-  {{!-- Passport  --}}
-  <p><a style="color: #337ab7;" href="/dog-owner-login">Dog Owner Login</a></p>
-  <p>-- or --</p>
-  <p><a style="color: #337ab7;" href="/dog-owner-signup">Dog Owner Signup</a></p>
-  </link>
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
+<script src="/js/canvas.js"></script>
