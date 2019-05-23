@@ -61,8 +61,8 @@ module.exports = function(app) {
     });
   });
 
-   // How to add a new walk page
-   app.get("/new-walk", function(req, res) {
+  // How to add a new walk page
+  app.get("/new-walk", function(req, res) {
     res.render("new-walk", {
       msg: "New Walk"
     });
