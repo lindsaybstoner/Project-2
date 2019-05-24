@@ -67,6 +67,7 @@
   let convertedTime = 0;
   //const activityArray = [["red", 39.948332, -75.166127], ["blue", 39.949206712438, -75.1659201061516], ["green", 39.950217, -75.162135], ["blue", 39.950392, -75.167560], ["red", 39.9494108300057, -75.1686977423011]];
   const activityArray = []; //["purple", 39.9465588, -75.167374]
+  const activityObject = [];
 
   // Handle on click events
   window.onload = function () {
@@ -98,7 +99,6 @@
   const stop = () => {
     clearInterval(intervalId);
     clockRunnig = false;
-
     // Store stopwatch time
     let walkTime = time;
     console.log('walk time', walkTime)
@@ -142,12 +142,20 @@
     console.log('run getCoordinates function')
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
-        var pos = {
+        let pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
-        console.log(pos.lat, pos.lng);
-        activityArray.push([color, pos.lat, pos.lng])
+        console.log(color, pos.lat, pos.lng);
+        // Build activity object
+        let activityObjectBuild = {
+          activity: color,
+          lat: pos.lat,
+          lng: pos.lng
+        }
+        console.log("activity object", activityObjectBuild);
+        activityObject.push(activityObjectBuild);
+        activityArray.push([color, pos.lat, pos.lng]);
         initMap();
 
         return pos;
@@ -236,25 +244,16 @@
   // store walk details
   $("#submit-walk").on("click", function (event) {
     event.preventDefault();
-    console.log("submit walk")
+    console.log("submit walk object", activityObject)
     let walkTime = convertedTime;
-    let walkActivity = activityArray;
-    const activities = [
-      {
-        type: 'red',
-        lat: 123,
-        lng: 345
-      },
-      {
-        type: 'blue'
-      }]
+    let walkActivity = activityObject;
 
     // Walk Object
     let addWalk = {
       time: walkTime,
-      activity: walkActivity
+      activity: JSON.stringify(activityObject)
     };
-    console.log(addWalk)
+    console.log('Final Walk Object', addWalk)
 
     // AJAX POST
     $.ajax("/api/walks", {
