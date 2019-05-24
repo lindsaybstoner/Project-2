@@ -1,10 +1,10 @@
 var db = require("../models");
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
-module.exports = function (app) {
+module.exports = function(app) {
   // Load index page
-  app.get("/", function (req, res) {
-    db.Example.findAll({}).then(function (dbExamples) {
+  app.get("/", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
       res.render("index", {
         msg: "Welcome!",
         examples: dbExamples
@@ -13,7 +13,7 @@ module.exports = function (app) {
   });
 
   // Load example page and pass in an example by id
-  app.get("/example/:id", function (req, res) {
+  app.get("/example/:id", function(req, res) {
     db.Example.findOne({ where: { id: req.params.id } }).then(function (
       dbExample
     ) {
@@ -23,18 +23,22 @@ module.exports = function (app) {
     });
   });
 
-  /*
-    Dog Owner Login/Signup 
-  */
+  // Dog owner landing page
+  app.get("/dog-owner", function(req, res) {
+    res.render("dog-owner", {
+      userId: req.user.id,
+      userFirstName: req.user.firstName
+    });
+  });
 
   // Dog Owner Login
-  app.get("/dog-owner-login", function (req, res) {
+  app.get("/dog-owner-login", function(req, res) {
     res.render("dog-owner-login", {
       msg: "Login"
     });
   });
 
-  app.get("/dog-owner-login", function (req, res) {
+  app.get("/dog-owner-login", function(req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
       res.redirect("/dog-owner");
@@ -42,7 +46,7 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, "../public/dog-owner-signup.html"));
   });
 
-  app.get("/dog-owner-login", function (req, res) {
+  app.get("/dog-owner-login", function(req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
       res.redirect("/dog-owner");
@@ -51,14 +55,14 @@ module.exports = function (app) {
   });
 
   // Dog Owner Sign-up
-  app.get("/dog-owner-signup", function (req, res) {
+  app.get("/dog-owner-signup", function(req, res) {
     res.render("dog-owner-signup", {
       msg: "Signup"
     });
   });
 
   // Dog owner landing page
-  app.get("/dog-owner", function (req, res) {
+  app.get("/dog-owner", function(req, res) {
     res.render("dog-owner", {
       msg: "Welcome"
     });
@@ -66,7 +70,7 @@ module.exports = function (app) {
 
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
-  app.get("/dog-owner", isAuthenticated, function (req, res) {
+  app.get("/dog-owner", isAuthenticated, function(req, res) {
     res.sendFile(path.join(__dirname, "../public/dog-owner.html"));
   });
 
@@ -82,7 +86,7 @@ module.exports = function (app) {
   /*
     Walking Dog Page
   */
-  app.get("/walk-dog", function (req, res) {
+  app.get("/walk-dog", function(req, res) {
     res.render("walk-dog", {
       userId: req.user.id,
       userEmail: req.user.email,
@@ -91,7 +95,7 @@ module.exports = function (app) {
   });
 
   // Render 404 page for any unmatched routes
-  app.get("*", function (req, res) {
+  app.get("*", function(req, res) {
     res.render("404");
   });
 };

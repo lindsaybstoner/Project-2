@@ -2,7 +2,7 @@ module.exports = {
   development: {
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: "dogApp",
+    database: "dogapp_db",
     host: "localhost",
     dialect: "mysql"
   },
@@ -15,6 +15,7 @@ module.exports = {
     logging: false
   },
   production: {
+    // eslint-disable-next-line camelcase
     use_env_variable: "JAWSDB_URL",
     dialect: "mysql"
   }

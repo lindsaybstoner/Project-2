@@ -84,6 +84,24 @@ module.exports = function (app) {
     }
   });
 
+  app.post("/api/dog-owner", function(req, res) {
+    console.log("dog form post request log", req.body);
+    console.log("user id", req.user.id);
+    db.Dog.create({
+      name: req.body.name,
+      breed: req.body.breed,
+      age: req.body.age,
+      sex: req.body.sex,
+      weight: req.body.weight,
+      UserId: req.user.id
+    })
+      .then(function() {
+        res.redirect(307, "/api/dog-owner-login");
+      })
+      .catch(function(err) {
+        console.log(err);
+        res.json(err);
+        
   // Dog Walk POST Route
   app.post("/api/walks", function (req, res) {
     console.log(req.body);
