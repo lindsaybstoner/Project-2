@@ -23,6 +23,14 @@ module.exports = function (sequelize, DataTypes) {
     });
   };
 
+  Walk.associate = function (models) {
+    Walk.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  }
+
   return Walk;
 }
 

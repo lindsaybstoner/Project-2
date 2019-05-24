@@ -86,7 +86,6 @@ module.exports = function (app) {
 
   app.post("/api/dog-owner", function (req, res) {
     console.log("dog form post request log", req.body);
-    console.log("user id", req.user.id);
     db.Dog.create({
       name: req.body.name,
       breed: req.body.breed,
@@ -121,5 +120,12 @@ module.exports = function (app) {
         res.json(err);
         // res.status(422).json(err.errors[0].message);
       });
+  });
+
+  // Get all dogs data
+  app.get("/api/dog_data", function (req, res) {
+    db.Dog.findAll({}).then(function (results) {
+      res.json(results);
+    });
   });
 };
