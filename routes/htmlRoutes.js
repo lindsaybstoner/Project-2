@@ -26,7 +26,8 @@ module.exports = function(app) {
   // Dog owner landing page
   app.get("/dog-owner", function(req, res) {
     res.render("dog-owner", {
-      msg: "Welcome"
+      userId: req.user.id,
+      userFirstName: req.user.firstName
     });
   });
 
