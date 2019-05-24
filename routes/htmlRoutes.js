@@ -14,7 +14,7 @@ module.exports = function(app) {
 
   // Load example page and pass in an example by id
   app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(
+    db.Example.findOne({ where: { id: req.params.id } }).then(function (
       dbExample
     ) {
       res.render("example", {
@@ -31,14 +31,13 @@ module.exports = function(app) {
     });
   });
 
-  // Dog owner login page
+  // Dog Owner Login
   app.get("/dog-owner-login", function(req, res) {
     res.render("dog-owner-login", {
       msg: "Login"
     });
   });
 
-  // Dog Owner Login
   app.get("/dog-owner-login", function(req, res) {
     // If the user already has an account send them to the members page
     if (req.user) {
@@ -55,17 +54,17 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/dog-owner-login.html"));
   });
 
-  // Dog walk page
-  app.get("/walks", function(req, res) {
-    res.render("walks", {
-      msg: "Walks"
+  // Dog Owner Sign-up
+  app.get("/dog-owner-signup", function(req, res) {
+    res.render("dog-owner-signup", {
+      msg: "Signup"
     });
   });
 
-  // How to add a new walk page
-  app.get("/new-walk", function(req, res) {
-    res.render("new-walk", {
-      msg: "New Walk"
+  // Dog owner landing page
+  app.get("/dog-owner", function(req, res) {
+    res.render("dog-owner", {
+      msg: "Welcome"
     });
   });
 
@@ -73,13 +72,6 @@ module.exports = function(app) {
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/dog-owner", isAuthenticated, function(req, res) {
     res.sendFile(path.join(__dirname, "../public/dog-owner.html"));
-  });
-
-  // Dog owner login page
-  app.get("/dog-owner-signup", function(req, res) {
-    res.render("dog-owner-signup", {
-      msg: "Signup"
-    });
   });
 
   // Dog Owner Signup
@@ -90,6 +82,17 @@ module.exports = function(app) {
   //   }
   //   res.sendFile(path.join(__dirname, "../public/dog-owner-signup.html"));
   // });
+
+  /*
+    Walking Dog Page
+  */
+  app.get("/walk-dog", function(req, res) {
+    res.render("walk-dog", {
+      userId: req.user.id,
+      userEmail: req.user.email,
+      userFirstName: req.user.firstName
+    });
+  });
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
