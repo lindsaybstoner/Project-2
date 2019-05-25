@@ -44,12 +44,13 @@ $(document).ready(function() {
   });
   // post request to create dog
   function createDog(name, breed, age, sex, weight) {
-    $.post("/api/dog-owner", {
+    $.post("/api/dog-form", {
       name: name,
       breed: breed,
       age: age,
       sex: sex,
       weight: weight
+      // add userId?
     });
   }
   // function to get and display dogs once form is submitted
