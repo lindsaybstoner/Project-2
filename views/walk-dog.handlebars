@@ -66,7 +66,7 @@
   // Global variables
   let convertedTime = 0;
   //const activityArray = [["red", 39.948332, -75.166127], ["blue", 39.949206712438, -75.1659201061516], ["green", 39.950217, -75.162135], ["blue", 39.950392, -75.167560], ["red", 39.9494108300057, -75.1686977423011]];
-  const activityArray = []; //["purple", 39.9465588, -75.167374]
+  const activityArray = [];
   const activityObject = [];
 
   // Handle on click events
@@ -169,7 +169,7 @@
     } else {
       // Browser doesn't support Geolocation
       handleLocationError(false, infoWindow, map.getCenter());
-    }
+    };
 
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       infoWindow.setPosition(pos);
@@ -177,7 +177,7 @@
         'Error: The Geolocation service failed.' :
         'Error: Your browser doesn\'t support geolocation.');
       infoWindow.open(map);
-    }
+    };
   };
 
 
@@ -193,12 +193,15 @@
 
     // Loop through the activity array - add markers to the map
     for (let i = 0; i < activityArray.length; i++) {
+      let markerTitle = activityArray[i][0]
+      console.log(markerTitle);
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(activityArray[i][1], activityArray[i][2]),
         map: map,
-        title: activityArray[i][0],
+        title: markerTitle,
         icon: `/assets/${activityArray[i][0]}-dot.png`,
         animation: google.maps.Animation.DROP
+
       });
       // For each marker - add an event listener to display the title when someone clicks on the marker
       google.maps.event.addListener(marker, 'click', ((marker, i) => {
@@ -212,7 +215,17 @@
       bounds.extend(marker.position);
     }
     // Set the viewpoint based on the give data
-    map.fitBounds(bounds, 50)
+    map.fitBounds(bounds)
+
+    google.maps.event.addListenerOnce(map, "zoom_changed", function () {
+      currentZoomLevel = map.getZoom();
+      console.log(`the zoom level is  ${currentZoomLevel}`)
+      // Condition to set zoom level 
+      if (currentZoomLevel > 19) {
+        map.setZoom(18);
+      };
+    });
+
   };
 
   // Activity buttons code
