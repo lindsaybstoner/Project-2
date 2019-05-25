@@ -13,14 +13,11 @@ p,a,div,span,nav {
 .flexCenter {
     justify-content: center;
 }
-.fullHeight {
-    height: 100vh;
-}
 .itemCenter {
     align-items: center;
 }
 .fullHeight {
-    height: 100vh;
+    height: 90vh;
 }
 .centerImage {
     background: url('../img/landing.jpg') center;
@@ -40,4 +37,16 @@ p,a,div,span,nav {
 .login-prompt {
     color: white;
     margin: 10%;
+}
+
+.mission {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.landing-taglines {
+    color: #90812b;
+    margin-top: 2%;
 }
