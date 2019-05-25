@@ -1,0 +1,13 @@
+/* global styles across signup and login forms */
+.signup-form-container,
+.login-form-container {
+    width: 50%;
+    margin: auto;
+    margin-top: 15%;
+}
+
+
+/* signup form styles */
+
+
+/* login form styles */

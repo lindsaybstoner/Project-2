@@ -1,17 +1,18 @@
 {{!-- <canvas id="canvas"></canvas> --}}
-<h1>Welcome to Dog App</h1>
 
-<div id="home" class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <h1><i class="fas fa-dog"></i></h1>
-      <div class="userOptions">
-        <h3>First Time Here?</h3>
-        <a href="/dog-owner-signup"><button type="button" class="btn btn-outline-light"><strong>Dog Owner
-              Signup</strong> <i class="fas fa-user-plus leftspace"></i></button></a>
-        <h3>Back Again?</h3>
-        <a href="/dog-owner-login"><button type="button" class="btn btn-outline-light leftspace"><strong>Dog Owner Login</strong>
-            <i class="fas fa-user"></i></button></a>
+<div id="home" class="flexContainer flexCenter itemCenter fullHeight centerImage">
+  <h1 class="welcome-header">Dog App Name</h1>
+  <div class="userOptions flexContainer flexCenter itemCenter fullHeight">
+    <div class="get-started-prompt">
+      <h3>Get started</h3>
+      <a href="/dog-owner-signup"><button type="button" class="btn btn-outline-light"><strong>Dog Owner
+            Signup</strong> <i class="fas fa-user-plus leftspace"></i></button></a>
+    </div>
+    <div class="login-prompt">
+      <h3>Login</h3>
+      <a href="/dog-owner-login"><button type="button" class="btn btn-outline-light leftspace"><strong>Dog Owner
+            Login</strong>
+          <i class="fas fa-user"></i></button></a>
       </div>
     </div>
   </div>

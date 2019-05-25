@@ -84,7 +84,7 @@ module.exports = function (app) {
     }
   });
 
-  app.post("/api/dog-owner", function (req, res) {
+  app.post("/api/dog-form", function (req, res) {
     console.log("dog form post request log", req.body);
     db.Dog.create({
       name: req.body.name,
@@ -102,6 +102,7 @@ module.exports = function (app) {
         res.json(err);
       });
   });
+  
   // Dog Walk POST Route
   app.post("/api/walks", function (req, res) {
     console.log(req.body);
