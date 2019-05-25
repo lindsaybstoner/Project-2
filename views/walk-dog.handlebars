@@ -217,6 +217,7 @@
     // Set the viewpoint based on the give data
     map.fitBounds(bounds)
 
+    // Change the zoom value
     google.maps.event.addListenerOnce(map, "zoom_changed", function () {
       currentZoomLevel = map.getZoom();
       console.log(`the zoom level is  ${currentZoomLevel}`)
