@@ -1,20 +1,20 @@
-<h1>Owner's Name</h1>
+<h1>{{userFirstName}}</h1>
 <div class="container">
     <div class="row">
         <div class="col-md-7">
             <h2>Your Dogs</h2>
             <div class="card">
-                {{!-- {{#each dogs}} --}}
+                {{#each Dog}}
                 <img src="/img/IMG_0517 2.JPG" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Dog Name {{!-- {{this.name}} --}}</h5>
+                    <h5 class="card-title">Name: {{this.name}}</h5>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Age: {{!-- {{this.age}} --}}</li>
-                    <li class="list-group-item">Breed: {{!-- {{this.breed}} --}}</li>
-                    <li class="list-group-item">Weight: {{!-- {{this.weight}} --}}</li>
-                    <li class="list-group-item">Gender: {{!-- {{this.gender}} --}}</li>
-                    <li class="list-group-item">Dog Walker: {{!-- {{this.walker}} --}}</li>
+                    <li class="list-group-item">Age: {{this.age}}</li>
+                    <li class="list-group-item">Breed: {{this.breed}}</li>
+                    <li class="list-group-item">Weight: {{this.weight}}</li>
+                    <li class="list-group-item">Sex: {{this.sex}}</li>
+                   {{!--  <li class="list-group-item">Dog Walker: {{this.walker}}</li> --}}
                 </ul>
                 <div class="card-body">
                     <a href="/walk-dog" class="card-link"><button type="button" class="btn btn-outline-dark">Take For A
@@ -22,7 +22,7 @@
                     <a href="/walks" class="card-link"><button type="button" class="btn btn-outline-dark">Recent Walks
                             <i class="fas fa-shoe-prints leftspace"></i></button></a>
                 </div>
-                {{!-- {{/each}} --}}
+                {{/each}}
             </div>
         </div>
         <div class="col-md-5">

@@ -23,11 +23,16 @@ module.exports = function(app) {
     });
   });
 
-  // Dog owner landing page
+  // Dog owner landing page - display both the name of the user and all their dogs
   app.get("/dog-owner", function(req, res) {
-    res.render("dog-owner", {
-      userId: req.user.id,
-      userFirstName: req.user.firstName
+    db.Dog.findAll({
+      where: { UserId: req.user.id }
+    }).then(function(results) {
+      res.render("dog-owner", {
+        userId: req.user.id,
+        userFirstName: req.user.firstName,
+        Dog: results
+      });
     });
   });
 
