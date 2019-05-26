@@ -31,6 +31,13 @@ module.exports = function(app) {
     });
   });
 
+  // Dog form page
+  app.get("/dog-form", function(req, res) {
+    res.render("dog-form", {
+      msg: "Dog form"
+    });
+  });
+
   // Dog Owner Login
   app.get("/dog-owner-login", function(req, res) {
     res.render("dog-owner-login", {

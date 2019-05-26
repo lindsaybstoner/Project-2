@@ -155,12 +155,12 @@ var update = function() {
 };
 
 //Gui uses this to clear the canvas
-var clearCanvas = function() {
-  ctx.fillStyle = "rgba(255, 255, 255, 1.0)";
-  ctx.beginPath();
-  ctx.rect(0, 0, width, height);
-  ctx.closePath();
-  ctx.fill();
-};
+// var clearCanvas = function() {
+//   ctx.fillStyle = "rgba(255, 255, 255, 1.0)";
+//   ctx.beginPath();
+//   ctx.rect(0, 0, width, height);
+//   ctx.closePath();
+//   ctx.fill();
+// };
 
 init();
