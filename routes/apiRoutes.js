@@ -121,11 +121,4 @@ module.exports = function(app) {
         // res.status(422).json(err.errors[0].message);
       });
   });
-
-  /* // Get all dogs data
-  app.get("/api/dog_data", function (req, res) {
-    db.Dog.findAll({}).then(function (results) {
-      res.json(results);
-    });
-  }); */
 };
