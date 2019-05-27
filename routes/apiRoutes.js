@@ -123,6 +123,9 @@ module.exports = function(app) {
       });
   });
 
+
+  
+
   // Get all dogs data
   app.get("/api/dog_data", function(req, res) {
     db.Dog.findAll({}).then(function(results) {
