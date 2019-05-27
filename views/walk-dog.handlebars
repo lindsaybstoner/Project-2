@@ -20,7 +20,10 @@
 {{else}}
 <p>Not logged-in <a href='/'>Log In</a></p>
 {{/if}}
-
+<br>
+<h2>Dog Info</h2>
+<h4 id="dog-id"></h4>
+<h4 id="dog-name"></h4>
 <br>
 <div id="timer-container">
   <h2>Walking Timer</h2>
@@ -69,6 +72,8 @@
   //const activityArray = [["red", 39.948332, -75.166127], ["blue", 39.949206712438, -75.1659201061516], ["green", 39.950217, -75.162135], ["blue", 39.950392, -75.167560], ["red", 39.9494108300057, -75.1686977423011]];
   const activityArray = [];
   const activityObject = [];
+  const url = window.location.search;
+  console.log("URL", url)
 
   // Handle on click events
   window.onload = function () {
@@ -186,7 +191,9 @@
   function initMap() {
     let markers = [];
     let infowindow = new google.maps.InfoWindow({});
-
+    // Get URL after the "?"
+    let url = window.location.search;
+    console.log("search url", url)
     map = new google.maps.Map(document.getElementById('map'), {});
 
     // Create the viewpoint property
@@ -278,6 +285,24 @@
       console.log("walk added")
     })
   });
+
+  // Get Dog id 
+  if (url.indexOf("?dog_id") !== -1) {
+    let dogId = url.split("=")[1];
+    console.log("Dog ID", dogId)
+
+    // Get Dog data by dog id
+    $.get(`/api/dog_data/${dogId}`, function (dogData) {
+      if (dogData) {
+        console.log("Dog Data", dogData);
+        // Populate site
+        $("#dog-id").text(`Dog Id: ${dogData.id}`)
+        $("#dog-name").text(`Dog Id: ${dogData.name}`)
+      }
+    });
+  };
+
+
 
 
 </script>

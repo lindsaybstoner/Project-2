@@ -129,4 +129,17 @@ module.exports = function(app) {
       res.json(results);
     });
   });
+
+  // Ge(t individual dog data
+  app.get("/api/dog_data/:dogId", function(req, res) {
+    db.Dog.findOne({
+      where: {
+        id: req.params.dogId
+      }
+      // include walk tabel?
+    }).then(function(results) {
+      console.log(results);
+      res.json(results);
+    });
+  });
 };
