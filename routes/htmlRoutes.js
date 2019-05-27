@@ -25,9 +25,14 @@ module.exports = function(app) {
 
   // Dog owner landing page
   app.get("/dog-owner", function(req, res) {
-    res.render("dog-owner", {
-      userId: req.user.id,
-      userFirstName: req.user.firstName
+    db.Dog.findAll({
+      where: { UserId: req.user.id }
+    }).then(function(results) {
+      res.render("dog-owner", {
+        userId: req.user.id,
+        userFirstName: req.user.firstName,
+        Dog: results
+      });
     });
   });
 
@@ -68,12 +73,12 @@ module.exports = function(app) {
     });
   });
 
-  // Dog owner landing page
-  app.get("/dog-owner", function(req, res) {
-    res.render("dog-owner", {
-      msg: "Welcome"
-    });
-  });
+  /* // Dog owner landing page
+    app.get("/dog-owner", function(req, res) {
+      res.render("dog-owner", {
+        msg: "Welcome"
+      });
+    }); */
 
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
@@ -91,8 +96,8 @@ module.exports = function(app) {
   // });
 
   /*
-    Walking Dog Page
-  */
+      Walking Dog Page
+    */
   app.get("/walk-dog", function(req, res) {
     res.render("walk-dog", {
       userId: req.user.id,
