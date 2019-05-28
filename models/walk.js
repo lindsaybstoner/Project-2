@@ -5,6 +5,9 @@ module.exports = function (sequelize, DataTypes) {
     },
     activity: {
       type: DataTypes.STRING
+    },
+    note: {
+      type: DataTypes.TEXT
     }
   });
 
