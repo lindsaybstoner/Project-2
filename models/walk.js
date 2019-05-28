@@ -1,21 +1,14 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var Walk = sequelize.define("Walk", {
     time: {
       type: DataTypes.STRING
     },
     activity: {
       type: DataTypes.STRING
-      // get: function () {
-      //   return JSON.parse(this.getDataValue('activity'))
-      // },
-      // set: function (val) {
-      //   console.log(val)
-      //   return this.setDataValue('activity', JSON.stringify(val))
-      // }
     }
   });
 
-  Walk.associate = function(models) {
+  Walk.associate = function (models) {
     Walk.belongsTo(models.User, {
       foreignKey: {
         allowNull: false
@@ -23,8 +16,8 @@ module.exports = function(sequelize, DataTypes) {
     });
   };
 
-  Walk.associate = function(models) {
-    Walk.belongsTo(models.User, {
+  Walk.associate = function (models) {
+    Walk.belongsTo(models.Dog, {
       foreignKey: {
         allowNull: false
       }

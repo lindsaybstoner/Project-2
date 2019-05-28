@@ -73,6 +73,7 @@
   const activityArray = [];
   const activityObject = [];
   const url = window.location.search;
+  let dogId;
   console.log("URL", url)
 
   // Handle on click events
@@ -267,13 +268,15 @@
   $("#submit-walk").on("click", function (event) {
     event.preventDefault();
     console.log("submit walk object", activityObject)
+    console.log("submit walk object - dog id", dogId)
     let walkTime = convertedTime;
     let walkActivity = activityObject;
 
     // Walk Object
     let addWalk = {
       time: walkTime,
-      activity: JSON.stringify(activityObject)
+      activity: JSON.stringify(activityObject),
+      dogId: parseInt(dogId)
     };
     console.log('Final Walk Object', addWalk)
 
@@ -288,7 +291,7 @@
 
   // Get Dog id 
   if (url.indexOf("?dog_id") !== -1) {
-    let dogId = url.split("=")[1];
+    dogId = url.split("=")[1];
     console.log("Dog ID", dogId)
 
     // Get Dog data by dog id

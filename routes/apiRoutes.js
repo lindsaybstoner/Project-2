@@ -113,7 +113,8 @@ module.exports = function (app) {
     db.Walk.create({
       time: req.body.time,
       activity: req.body.activity,
-      UserId: req.user.id
+      UserId: req.user.id,
+      DogId: req.body.DogId
     })
       .then(function (results) {
         res.json(results);
