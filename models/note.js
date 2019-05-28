@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Note.associate = function(models) {
-    Note.belongsTo(models.User, {
+    Note.belongsTo(models.Dog, {
       foreignKey: {
         allowNull: false
       }
