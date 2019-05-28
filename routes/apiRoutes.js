@@ -86,7 +86,7 @@ module.exports = function(app) {
     }
   });
 
- /*  app.post("/api/dog-form", function(req, res) {
+  /*  app.post("/api/dog-form", function(req, res) {
     console.log("dog form post request log", req.body);
     db.Dog.create({
       name: req.body.name,
@@ -132,7 +132,7 @@ module.exports = function(app) {
     });
   });
 
-  // Ge(t individual dog data
+  // Get individual dog data
   app.get("/api/dog_data/:dogId", function(req, res) {
     db.Dog.findOne({
       where: {
@@ -145,6 +145,7 @@ module.exports = function(app) {
     });
   });
 
+  //get all the dog information from the form and put it in the database
   app.post("/profile", upload.single("dogImg"), function(req, res, next) {
     console.log("______________________________");
     console.log(req.body);
@@ -152,12 +153,14 @@ module.exports = function(app) {
     console.log(req.file);
     console.log("______________________________");
     db.Dog.create({
+      // req.body has all the text information on it
       name: req.body.name,
       breed: req.body.breed,
       age: req.body.age,
       sex: req.body.sex,
       weight: req.body.weight,
-      image: req.file.path,
+      // req.file has the uploaded file on it
+      image: "/uploads/" + req.file.filename,
       UserId: req.user.id
     })
       .then(function() {
@@ -167,9 +170,5 @@ module.exports = function(app) {
         console.log(err);
         res.json(err);
       });
-    // req.file is the `dogImg` file
-    // req.body will hold the text fields, if there were any
-    /* console.log("We are in the profile post route _____________________");
-    console.log(req.file); */
   });
 };
