@@ -164,7 +164,7 @@ module.exports = function(app) {
       UserId: req.user.id
     })
       .then(function() {
-        res.redirect(307, "/api/dog-owner-login");
+        res.redirect("/dog-owner");
       })
       .catch(function(err) {
         console.log(err);
