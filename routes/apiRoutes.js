@@ -1,5 +1,7 @@
 var db = require("../models");
 var passport = require("../config/passport");
+var multer = require("multer");
+var upload = multer({ dest: "./public/uploads/" });
 
 module.exports = function (app) {
   // Get all examples
@@ -84,7 +86,7 @@ module.exports = function (app) {
     }
   });
 
-  app.post("/api/dog-form", function (req, res) {
+  /*  app.post("/api/dog-form", function(req, res) {
     console.log("dog form post request log", req.body);
     db.Dog.create({
       name: req.body.name,
@@ -101,7 +103,7 @@ module.exports = function (app) {
         console.log(err);
         res.json(err);
       });
-  });
+  }); */
 
   // Dog Walk POST Route
   app.post("/api/walks", function (req, res) {
@@ -130,7 +132,7 @@ module.exports = function (app) {
     });
   });
 
-  // Ge(t individual dog data
+  // Get individual dog data
   app.get("/api/dog_data/:dogId", function (req, res) {
     db.Dog.findOne({
       where: {
@@ -141,5 +143,32 @@ module.exports = function (app) {
       console.log(results);
       res.json(results);
     });
+  });
+
+  //get all the dog information from the form and put it in the database
+  app.post("/profile", upload.single("dogImg"), function (req, res, next) {
+    console.log("______________________________");
+    console.log(req.body);
+    console.log("______________________________");
+    console.log(req.file);
+    console.log("______________________________");
+    db.Dog.create({
+      // req.body has all the text information on it
+      name: req.body.name,
+      breed: req.body.breed,
+      age: req.body.age,
+      sex: req.body.sex,
+      weight: req.body.weight,
+      // req.file has the uploaded file on it
+      image: "/uploads/" + req.file.filename,
+      UserId: req.user.id
+    })
+      .then(function () {
+        res.redirect(307, "/api/dog-owner-login");
+      })
+      .catch(function (err) {
+        console.log(err);
+        res.json(err);
+      });
   });
 };
