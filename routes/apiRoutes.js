@@ -114,7 +114,7 @@ module.exports = function (app) {
       time: req.body.time,
       activity: req.body.activity,
       UserId: req.user.id,
-      DogId: req.body.DogId,
+      DogId: req.body.dogId,
       note: req.user.id
     })
       .then(function (results) {
