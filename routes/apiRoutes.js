@@ -165,8 +165,8 @@ module.exports = function (app) {
       image: "/uploads/" + req.file.filename,
       UserId: req.user.id
     })
-      .then(function () {
-        res.redirect(307, "/api/dog-owner-login");
+      .then(function() {
+        res.redirect("/dog-owner");
       })
       .catch(function (err) {
         console.log(err);
