@@ -1,4 +1,4 @@
-console.log("HELLO?");
+/* console.log("HELLO?");
 
 $(document).ready(function() {
   $("#dogFormSubmit").on("click", function(event) {
@@ -55,3 +55,4 @@ $(document).ready(function() {
   }
   // function to get and display dogs once form is submitted
 });
+ */

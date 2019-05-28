@@ -18,6 +18,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     weight: {
       type: DataTypes.INTEGER
+    },
+    image: {
+      type: DataTypes.STRING
     }
   });
 
