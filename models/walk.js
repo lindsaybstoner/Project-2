@@ -5,13 +5,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     activity: {
       type: DataTypes.STRING
-      // get: function () {
-      //   return JSON.parse(this.getDataValue('activity'))
-      // },
-      // set: function (val) {
-      //   console.log(val)
-      //   return this.setDataValue('activity', JSON.stringify(val))
-      // }
+    },
+    note: {
+      type: DataTypes.TEXT
     }
   });
 
