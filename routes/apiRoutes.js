@@ -1,24 +1,26 @@
 var db = require("../models");
 var passport = require("../config/passport");
+var multer = require("multer");
+var upload = multer({ dest: "./public/uploads/" });
 
-module.exports = function(app) {
+module.exports = function (app) {
   // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
+  app.get("/api/examples", function (req, res) {
+    db.Example.findAll({}).then(function (dbExamples) {
       res.json(dbExamples);
     });
   });
 
   // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
+  app.post("/api/examples", function (req, res) {
+    db.Example.create(req.body).then(function (dbExample) {
       res.json(dbExample);
     });
   });
 
   // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(
+  app.delete("/api/examples/:id", function (req, res) {
+    db.Example.destroy({ where: { id: req.params.id } }).then(function (
       dbExample
     ) {
       res.json(dbExample);
@@ -26,7 +28,7 @@ module.exports = function(app) {
   });
 
   //  Dog Owner Login
-  app.post("/api/dog-owner-login", passport.authenticate("local"), function(
+  app.post("/api/dog-owner-login", passport.authenticate("local"), function (
     req,
     res
   ) {
@@ -39,7 +41,7 @@ module.exports = function(app) {
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
-  app.post("/api/dog-owner-signup", function(req, res) {
+  app.post("/api/dog-owner-signup", function (req, res) {
     console.log("api log", req.body);
     db.User.create({
       email: req.body.email,
@@ -52,10 +54,10 @@ module.exports = function(app) {
       state: req.body.state,
       zipcode: req.body.zipcode
     })
-      .then(function() {
+      .then(function () {
         res.redirect(307, "/api/dog-owner-login");
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log(err);
         res.json(err);
         // res.status(422).json(err.errors[0].message);
@@ -63,13 +65,13 @@ module.exports = function(app) {
   });
 
   // Route for logging user out
-  app.get("/logout", function(req, res) {
+  app.get("/logout", function (req, res) {
     req.logout();
     res.redirect("/");
   });
 
   // Route for getting some data about our user to be used client side
-  app.get("/api/user_data", function(req, res) {
+  app.get("/api/user_data", function (req, res) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
@@ -84,7 +86,7 @@ module.exports = function(app) {
     }
   });
 
-  app.post("/api/dog-form", function(req, res) {
+  /*  app.post("/api/dog-form", function(req, res) {
     console.log("dog form post request log", req.body);
     db.Dog.create({
       name: req.body.name,
@@ -94,29 +96,31 @@ module.exports = function(app) {
       weight: req.body.weight,
       UserId: req.user.id
     })
-      .then(function() {
+      .then(function () {
         res.redirect(307, "/api/dog-owner-login");
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log(err);
         res.json(err);
       });
-  });
+  }); */
 
   // Dog Walk POST Route
-  app.post("/api/walks", function(req, res) {
+  app.post("/api/walks", function (req, res) {
     console.log(req.body);
     console.log(JSON.stringify(req.body.activity));
     console.log(req.body["activity[0][activity]"]);
     db.Walk.create({
       time: req.body.time,
       activity: req.body.activity,
-      UserId: req.user.id
+      UserId: req.user.id,
+      DogId: req.body.dogId,
+      note: req.user.id
     })
-      .then(function(results) {
+      .then(function (results) {
         res.json(results);
       })
-      .catch(function(err) {
+      .catch(function (err) {
         console.log(err);
         res.json(err);
         // res.status(422).json(err.errors[0].message);
@@ -148,22 +152,49 @@ module.exports = function(app) {
   });
 
   // Get all dogs data
-  app.get("/api/dog_data", function(req, res) {
-    db.Dog.findAll({}).then(function(results) {
+  app.get("/api/dog_data", function (req, res) {
+    db.Dog.findAll({}).then(function (results) {
       res.json(results);
     });
   });
 
-  // Ge(t individual dog data
-  app.get("/api/dog_data/:dogId", function(req, res) {
+  // Get individual dog data
+  app.get("/api/dog_data/:dogId", function (req, res) {
     db.Dog.findOne({
       where: {
         id: req.params.dogId
       }
       // include walk tabel?
-    }).then(function(results) {
+    }).then(function (results) {
       console.log(results);
       res.json(results);
     });
+  });
+
+  //get all the dog information from the form and put it in the database
+  app.post("/profile", upload.single("dogImg"), function (req, res, next) {
+    console.log("______________________________");
+    console.log(req.body);
+    console.log("______________________________");
+    console.log(req.file);
+    console.log("______________________________");
+    db.Dog.create({
+      // req.body has all the text information on it
+      name: req.body.name,
+      breed: req.body.breed,
+      age: req.body.age,
+      sex: req.body.sex,
+      weight: req.body.weight,
+      // req.file has the uploaded file on it
+      image: "/uploads/" + req.file.filename,
+      UserId: req.user.id
+    })
+      .then(function() {
+        res.redirect("/dog-owner");
+      })
+      .catch(function (err) {
+        console.log(err);
+        res.json(err);
+      });
   });
 };

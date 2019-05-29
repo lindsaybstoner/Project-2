@@ -1,33 +1,34 @@
 {{> navbar}}
 <h1 class="welcome-header">Tell us about your dog.</h1>
 <div class="add-dog-form">
-    <form class="dog-form">
+    <form class="dog-form" action="/profile" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="dog-name">Name</label>
-            <input type="text" class="form-control" id="dog-name" placeholder="Enter name...">
+            <input type="text" class="form-control" id="dog-name" name="name" placeholder="Enter name...">
         </div>
         <div class="form-group">
             <label for="dog-breed">Breed</label>
-            <input type="text" class="form-control" id="dog-breed" placeholder="Enter breed...">
+            <input type="text" class="form-control" id="dog-breed" name="breed" placeholder="Enter breed...">
         </div>
         <div class="form-group">
             <label for="dog-age">Age</label>
-            <input type="text" class="form-control" id="dog-age" placeholder="Enter age...">
+            <input type="text" class="form-control" id="dog-age" name="age" placeholder="Enter age...">
         </div>
         <div class="form-group">
             <label for="dog-sex">Sex</label>
-            <input type="text" class="form-control" id="dog-sex" placeholder="Enter sex...">
+            <input type="text" class="form-control" id="dog-sex" name="sex" placeholder="Enter sex...">
         </div>
         <div class="form-group">
             <label for="dog-weight">Weight</label>
-            <input type="text" class="form-control" id="dog-weight" placeholder="Enter weight...">
+            <input type="text" class="form-control" id="dog-weight" name="weight" placeholder="Enter weight...">
         </div>
+        <input type="file" name="dogImg" />
         <button type="submit" id="dogFormSubmit" class="btn btn-default">Submit</button>
         <br />
         <br />
         <p><a href="/dog-owner">Cancel</a></p>
     </form>
 </div>
-            
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/dog-form.js"></script>
