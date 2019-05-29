@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
   // Getting references to our form and input
   var signUpForm = $("form.signup");
   var emailInput = $("input#email-input");
@@ -10,11 +10,11 @@ $(document).ready(function() {
   var addressOneInput = $("input#address-one-input");
   var addressTwoInput = $("input#address-two-input");
   var cityInput = $("input#city-input");
-  var stateInput = $("input#state-input");
+  var stateInput = $("#state-input");
   var zipInput = $("input#zip-input");
 
   // When the signup button is clicked, we validate the email and password are not blank
-  signUpForm.on("submit", function(event) {
+  signUpForm.on("submit", function (event) {
     event.preventDefault();
     var userData = {
       email: emailInput.val().trim(),
@@ -71,7 +71,7 @@ $(document).ready(function() {
       state: state,
       zipcode: zipcode
     })
-      .then(function(data) {
+      .then(function (data) {
         window.location.replace(data);
         // If there's an error, handle it by throwing up a bootstrap alert
       })
