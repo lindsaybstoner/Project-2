@@ -2,21 +2,23 @@ module.exports = {
   development: {
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: "dogapp_db",
-    host: "localhost",
+    database: "migpmro3qtsccma6",
+    host: "tviw6wn55xwxejwj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     dialect: "mysql"
   },
   test: {
-    username: "root",
-    password: null,
-    database: "testdb",
-    host: "localhost",
-    dialect: "mysql",
-    logging: false
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: "migpmro3qtsccma6",
+    host: "tviw6wn55xwxejwj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    dialect: "mysql"
   },
   production: {
     // eslint-disable-next-line camelcase
-    use_env_variable: "JAWSDB_URL",
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: "migpmro3qtsccma6",
+    host: "tviw6wn55xwxejwj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     dialect: "mysql"
   }
 };
