@@ -39,7 +39,16 @@
   </div>
 </div>
 <br>
+
 <br>
+ <div id="notes-container">
+        <form>
+          <div class="form-group">
+            <label for="note-input">Notes</label>
+            <input type="text" class="form-control" id="note-input" placeholder="Leave a Note">
+          </div>
+        </form>
+      </div>
 {{!-- Store walk in database --}}
 <div id="submit-walk-conatiner">
   <button id="submit-walk" type="button" class="btn btn-info btn-lg">Submit Walk</button>
@@ -73,6 +82,7 @@
   const activityArray = [];
   const activityObject = [];
   const url = window.location.search;
+  let dogId;
   console.log("URL", url)
 
   // Handle on click events
@@ -267,14 +277,20 @@
   $("#submit-walk").on("click", function (event) {
     event.preventDefault();
     console.log("submit walk object", activityObject)
+    console.log("submit walk object - dog id", dogId)
     let walkTime = convertedTime;
     let walkActivity = activityObject;
+    let noteInput = $("#note-input").val().trim()
+
 
     // Walk Object
     let addWalk = {
       time: walkTime,
-      activity: JSON.stringify(activityObject)
+      activity: JSON.stringify(activityObject),
+      dogId: parseInt(dogId),
+      note: JSON.stringify(noteInput) 
     };
+    console.log("2")
     console.log('Final Walk Object', addWalk)
 
     // AJAX POST
@@ -288,7 +304,7 @@
 
   // Get Dog id 
   if (url.indexOf("?dog_id") !== -1) {
-    let dogId = url.split("=")[1];
+    dogId = url.split("=")[1];
     console.log("Dog ID", dogId)
 
     // Get Dog data by dog id
@@ -297,7 +313,7 @@
         console.log("Dog Data", dogData);
         // Populate site
         $("#dog-id").text(`Dog Id: ${dogData.id}`)
-        $("#dog-name").text(`Dog Id: ${dogData.name}`)
+        $("#dog-name").text(`Dog Name: ${dogData.name}`)
       }
     });
   };
