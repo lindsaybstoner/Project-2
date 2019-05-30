@@ -18,11 +18,13 @@
         {{!-- <li class="list-group-item">Dog Walker: {{this.walker}}</li> --}}
     </ul>
     <div class="card-body">
-        <a href="/walk-dog?dog_id={{this.id}}" class="card-link"><button type="button" class="btn btn-outline-dark">Take
+        <a href="/walk-dog?dog_id={{this.id}}" class="card-link"><button type="button" class="btn btn-outline-dark"><strong>Take
                 For A
-                Walk <i class="fas fa-walking leftspace"></i></button></a>
-        <a href="/walks" class="card-link"><button type="button" class="btn btn-outline-dark">Recent Walks
+                Walk</strong> <i class="fas fa-walking leftspace"></i></button></a>
+        <a href="/walks" class="card-link"><button type="button" class="btn btn-outline-dark"><strong>Recent Walks</strong> 
                 <i class="fas fa-shoe-prints leftspace"></i></button></a>
+        <button type="button" class="edit btn btn-outline-dark" data-id="{{id}}"><strong>Edit Dog</strong> <i class="fas fa-edit"></i></button>
+        <button type="button" class="delete btn btn-outline-danger" data-id="{{id}}"><strong>Delete Dog</strong> <i class="fas fa-trash-alt"></i></button>
     </div>
     {{/each}}
 
