@@ -1,59 +1,60 @@
 
-<h1 class="welcome-header">Join the pack.</h1>
-
-<div class="signup-form-container">
-  <h3>Create an account</h3>
-  <form class="signup">
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputFirstName">First Name</label>
-        <input type="text" class="form-control" id="first-name-input" placeholder="First name" autofocus>
+<div class="signup-page-container centerImageSignup">
+  <div class="signup-form-container">
+    <h1 class="welcome-header">Join the pack.</h1>
+    <h3>Create an account</h3>
+    <form class="signup">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputFirstName">First Name</label>
+          <input type="text" class="form-control" id="first-name-input" placeholder="First name" autofocus>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="inputLastName">Last Name</label>
+          <input type="text" class="form-control" id="last-name-input" placeholder="Last name">
+        </div>
       </div>
-      <div class="form-group col-md-6">
-        <label for="inputLastName">Last Name</label>
-        <input type="text" class="form-control" id="last-name-input" placeholder="Last name">
+      <div class="form-group">
+        <label for="inputAddress">Address</label>
+        <input type="text" class="form-control" id="address-one-input">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="inputAddress">Address</label>
-      <input type="text" class="form-control" id="address-one-input">
-    </div>
-    <div class="form-group">
-      <label for="inputAddress2">Address 2</label>
-      <input type="text" class="form-control" id="address-two-input">
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputCity">City</label>
-        <input type="text" class="form-control" id="city-input">
+      <div class="form-group">
+        <label for="inputAddress2">Address 2</label>
+        <input type="text" class="form-control" id="address-two-input">
       </div>
-      {{!-- Choose State Option --}}
-      <div class="form-group col-md-4">
-        <label for="inputState">State</label>
-        <input type="text" class="form-control" id="state-input">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputCity">City</label>
+          <input type="text" class="form-control" id="city-input">
+        </div>
+        {{!-- Choose State Option --}}
+        <div class="form-group col-md-4">
+          <label for="inputState">State</label>
+          <input type="text" class="form-control" id="state-input">
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputZip">Zip</label>
+          <input type="text" class="form-control" id="zip-input">
+        </div>
       </div>
-      <div class="form-group col-md-2">
-        <label for="inputZip">Zip</label>
-        <input type="text" class="form-control" id="zip-input">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="email-input" placeholder="Email">
       </div>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="email-input" placeholder="Email">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="password-input" placeholder="Password">
-    </div>
-    <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-      <span class="sr-only">Error:</span> <span class="msg"></span>
-    </div>
-    <button type="submit" class="btn btn-default">Create account</button>
-  </form>
-  <br />
-  <p>Already have an account? Login <a href="/dog-owner-login">here</a></p>
-  {{!-- <p>See your dog(s) <a href="/dog-owner">here</a></p> --}}
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="password-input" placeholder="Password">
+      </div>
+      <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span> <span class="msg"></span>
+      </div>
+      <button type="submit" class="btn btn-default">Create account</button>
+    </form>
+    <br />
+    <p>Already have an account? Login <a href="/dog-owner-login">here.</a></p>
+  </div>
+  <img src="../img/landing.jpg">
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

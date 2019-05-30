@@ -1,3 +1,7 @@
+body {
+    font-size: 1.2rem;
+}
+
 h1,h2,h3 {
     font-family: 'Poppins', sans-serif;
     color: #254452;
@@ -28,7 +32,7 @@ p,a,div,span,nav {
 
 .welcome-header {
     position: absolute;
-    top: 15%;
+    top: 10%;
     left: 5%;
     color: #254452;
     font-size: 3.4rem;
