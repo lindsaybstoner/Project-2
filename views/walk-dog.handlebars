@@ -72,8 +72,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 {{!-- Put JavaScript code on separate file --}}
 {{!-- <script type="text/javascript" src="js/signup.js"></script> --}}
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZlJZI6QLG4nL7RtUntrZdjXqhoLd7UF4">
-</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZlJZI6QLG4nL7RtUntrZdjXqhoLd7UF4&callback=initMap">
+  </script>
 <script type="text/javascript">
 
   // Global variables
@@ -248,7 +249,7 @@
   };
 
   // Activity buttons code
-  $("#red").on("click", function () {
+  $("#red").on("click", function (e) {
     console.log("on click red")
     // Invoke getCoordinates;
     getCoordinates("red");
@@ -318,7 +319,7 @@
     });
   };
 
-
-
+  // initiate map when using goes to "walk-dog" page
+  getCoordinates();
 
 </script>
