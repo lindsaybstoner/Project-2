@@ -1,7 +1,62 @@
-/* console.log("HELLO?");
+console.log("HELLO?");
 
 $(document).ready(function() {
-  $("#dogFormSubmit").on("click", function(event) {
+  // Sets a flag for whether or not we're updating a post to be false initially
+  var updating = false;
+  // Click events for the edit and delete buttons
+  $(document).on("click", "button.delete", handleDogDelete);
+  $(document).on("click", "button.edit", handleDogEdit);
+
+  // This function does an API call to delete dog
+  function deleteDog(id) {
+    $.ajax({
+      method: "DELETE",
+      url: "/api/dog_data/" + id
+    }).then(function() {
+      console.log("dog has been deleted");
+      window.location.reload();
+    });
+  }
+
+  function handleDogDelete() {
+    var id = $(this).data("id");
+    console.log(id);
+    /* console.log(dogId); */
+    deleteDog(id);
+  }
+
+  // Update a current dog, bring user back to the dog form
+  function updateDog(dog) {
+    $.ajax({
+      method: "PUT",
+      url: "/dog-form",
+      data: dog
+    }).then(function() {
+      window.location.href = "/dog-owner";
+    });
+  }
+
+  function handleDogEdit() {
+    localStorage.setItem("dogData", "");
+    
+    /* if (updating) {
+      newDog.id = dogId;
+      updateDog(newDog);
+    } */
+    var dogData = {
+      name: $("[data-name]").attr("data-name"),
+      breed: $("[data-breed]").attr("data-breed"),
+      age: $("[data-age]").attr("data-age"),
+      sex: $("[data-sex]").attr("data-sex"),
+      weight: $("[data-weight]").attr("data-weight")
+    };
+    localStorage.setItem("dogData", JSON.stringify(dogData));
+
+    window.location.href = "/dog-form";
+
+  }
+
+  /* $("#dogFormSubmit").on("click", function(event) {
     console.log("on submit button");
     event.preventDefault();
     var dogName = $("#dog-name");
@@ -53,6 +108,5 @@ $(document).ready(function() {
       // add userId?
     });
   }
-  // function to get and display dogs once form is submitted
+  // function to get and display dogs once form is submitted */
 });
- */
