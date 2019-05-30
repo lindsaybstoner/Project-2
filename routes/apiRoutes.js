@@ -115,7 +115,7 @@ module.exports = function (app) {
       activity: req.body.activity,
       UserId: req.user.id,
       DogId: req.body.dogId,
-      note: req.user.id
+      note: req.body.note
     })
       .then(function (results) {
         res.json(results);
@@ -125,30 +125,6 @@ module.exports = function (app) {
         res.json(err);
         // res.status(422).json(err.errors[0].message);
       });
-  });
-
-  // Notes GET route
-  app.get("/api/notes", function(req, res) {
-    // findAll returns all entries for a table when used with no options
-    db.Note.findAll({}).then(function(results) {
-      // We have access to the todos as an argument inside of the callback function
-      res.json(results);
-    });
-  });
-
-  // Notes POST route
-  app.post("/api/notes", function(req, res) {
-    console.log(req.body);
-    // create takes an argument of an object describing the item we want to
-    // insert into our table. In this case we just we pass in an object with a text
-    // and complete property (req.body)
-    db.Note.create({
-      text: req.body.text,
-      complete: req.body.complete
-    }).then(function(results) {
-      // We have access to the new todo as an argument inside of the callback function
-      res.json(results);
-    });
   });
 
   // Get all dogs data

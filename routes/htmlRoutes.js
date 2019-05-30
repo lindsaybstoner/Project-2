@@ -106,6 +106,15 @@ module.exports = function (app) {
     });
   });
 
+  app.get("/notes", isAuthenticated, function (req, res) {
+    res.render("notes", {
+      userId: req.user.id,
+      userEmail: req.user.email,
+      userFirstName: req.user.firstName
+    });
+  });
+
+
   // Render 404 page for any unmatched routes
   app.get("*", function (req, res) {
     res.render("404");
