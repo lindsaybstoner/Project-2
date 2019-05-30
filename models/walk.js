@@ -17,9 +17,6 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false
       }
     });
-  };
-
-  Walk.associate = function(models) {
     Walk.belongsTo(models.Dog, {
       foreignKey: {
         allowNull: false
