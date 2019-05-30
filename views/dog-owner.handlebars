@@ -8,13 +8,13 @@
     <a href="/dog-form">Add a dog</a>
     <img src="{{this.image}}" class="card-img-top" alt="...">
     <div class="card-body">
-        <h5 class="card-title">Name: {{this.name}}</h5>
+        <h5 class="card-title" data-name="{{this.name}}">Name: {{this.name}}</h5>
     </div>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">Age: {{this.age}}</li>
-        <li class="list-group-item">Breed: {{this.breed}}</li>
-        <li class="list-group-item">Weight: {{this.weight}}</li>
-        <li class="list-group-item">Gender: {{this.sex}}</li>
+        <li class="list-group-item" data-age="{{this.age}}">Age: {{this.age}}</li>
+        <li class="list-group-item" data-breed="{{this.breed}}">Breed: {{this.breed}}</li>
+        <li class="list-group-item" data-weight="{{this.weight}}">Weight: {{this.weight}}</li>
+        <li class="list-group-item" data-sex="{{this.sex}}">Sex: {{this.sex}}</li>
         {{!-- <li class="list-group-item">Dog Walker: {{this.walker}}</li> --}}
     </ul>
     <div class="card-body">

@@ -180,4 +180,15 @@ module.exports = function(app) {
       res.json(results);
     });
   });
+
+  // PUT route for updating dogs
+  app.put("/api/dog_data/:id", function(req, res) {
+    db.Dog.update(req.body, {
+      where: {
+        id: req.body.id
+      }
+    }).then(function(results) {
+      res.json(results);
+    });
+  });
 };
