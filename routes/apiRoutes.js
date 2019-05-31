@@ -115,7 +115,7 @@ module.exports = function (app) {
       activity: req.body.activity,
       UserId: req.user.id,
       DogId: req.body.dogId,
-      note: req.user.id
+      note: req.body.note
     })
       .then(function (results) {
         res.json(results);
