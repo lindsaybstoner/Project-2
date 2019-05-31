@@ -1,0 +1,30 @@
+{{>navbar}}
+
+<h3>Recent Notes</h3>
+<br>
+
+<div id="notes-display">
+{{#each Walk}}
+
+<p>{{moment createdAt format="MMMM DD, YYYY"}} note  {{this.note}}</p>
+
+{{/each}}
+
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+
+    $.get("/api/notes", function(data) {
+      notes = data;
+      console.log(data);
+    });
+
+var
+
+
+</script>

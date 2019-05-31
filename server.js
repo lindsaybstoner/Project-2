@@ -1,6 +1,10 @@
 require("dotenv").config();
 var express = require("express");
 var exphbs = require("express-handlebars");
+var handlebars = require('handlebars');
+handlebars.registerHelper('moment', require('helper-moment'));
+var moment = require('helper-moment');
+
 
 // Passport Packages
 var session = require("express-session");
