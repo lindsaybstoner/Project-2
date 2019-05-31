@@ -106,6 +106,19 @@ module.exports = function(app) {
     });
   });
 
+  
+
+  app.get("/notes", isAuthenticated, function(req, res) {
+    db.Walk.findAll({
+      where: { UserId: req.user.id }
+    }).then(function(results) {
+      res.render("notes", {
+        userId: req.user.id,
+        Walk: results
+      });
+    });
+  });
+
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
