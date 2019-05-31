@@ -5,12 +5,12 @@
 <div class="card dogs-card">
     {{#each Dog}}
     <h3>Your dogs</h3>
-    <a href="/dog-form">Add a dog</a>
+    <a href="/dog-form" id="orgDogForm">Add a dog</a>
     <img src="{{this.image}}" class="card-img-top" alt="...">
-    <div class="card-body">
+    <div class="card-body" data-id="{{this.id}}">
         <h5 class="card-title" data-name="{{this.name}}">Name: {{this.name}}</h5>
     </div>
-    <ul class="list-group list-group-flush">
+    <ul class="list-group list-group-flush" data-id="{{this.id}}">
         <li class="list-group-item" data-age="{{this.age}}">Age: {{this.age}}</li>
         <li class="list-group-item" data-breed="{{this.breed}}">Breed: {{this.breed}}</li>
         <li class="list-group-item" data-weight="{{this.weight}}">Weight: {{this.weight}}</li>
@@ -30,3 +30,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/dog-form.js"></script>
+
+    <script>
+        $("#orgDogForm").on("click", function(event){
+            //event.preventDefault();
+            localStorage.clear();
+        })
+    </script>

@@ -173,11 +173,6 @@ module.exports = function(app) {
 
   //get all the dog information from the form and put it in the database
   app.post("/profile", upload.single("dogImg"), function(req, res, next) {
-    console.log("______________________________");
-    console.log(req.body);
-    console.log("______________________________");
-    console.log(req.file);
-    console.log("______________________________");
     db.Dog.create({
       // req.body has all the text information on it
       name: req.body.name,
@@ -190,12 +185,24 @@ module.exports = function(app) {
       UserId: req.user.id
     })
       .then(function() {
+        console.log("hello________________________________________ /n");
         res.redirect("/dog-owner");
+
       })
       .catch(function(err) {
         console.log(err);
         res.json(err);
       });
+  });
+
+  app.post("/edit", upload.single("dogImg"), function(req, res, next) {
+    db.Dog.update(req.body, {
+      where: {
+        id: req.body.id
+      }
+    }).then(function(results) {
+      res.json(results);
+    });
   });
 
   // Delete a dog by its id
