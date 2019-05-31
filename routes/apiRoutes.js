@@ -128,11 +128,12 @@ module.exports = function (app) {
   });
 
   // Notes GET route
-  app.get("/api/notes", function(req, res) {
+  app.get("/api/notes", function (req, res) {
     db.Walk.findAll({
       where: {
         id: req.user.id
-      }}).then(function (results) {
+      }
+    }).then(function (results) {
       res.json(results);
     });
   });
@@ -140,6 +141,25 @@ module.exports = function (app) {
   // Get all dogs data
   app.get("/api/dog_data", function (req, res) {
     db.Dog.findAll({}).then(function (results) {
+      res.json(results);
+    });
+  });
+
+  // Get all walks data
+  app.get("/api/walks", function (req, res) {
+    db.Walk.findAll({}).then(function (results) {
+      res.json(results);
+    });
+  });
+
+  // Get individual dog walk data
+  app.get("/api/walks/:dogId", function (req, res) {
+    db.Walk.findAll({
+      where: {
+        DogId: req.params.dogId
+      }
+    }).then(function (results) {
+      console.log("dog walk stats", results);
       res.json(results);
     });
   });
@@ -158,7 +178,7 @@ module.exports = function (app) {
   }); */
 
   //get all the dog information from the form and put it in the database
-  app.post("/profile", upload.single("dogImg"), function(req, res, next) {
+  app.post("/profile", upload.single("dogImg"), function (req, res, next) {
     db.Dog.create({
       // req.body has all the text information on it
       name: req.body.name,
@@ -170,7 +190,7 @@ module.exports = function (app) {
       image: "/uploads/" + req.file.filename,
       UserId: req.user.id
     })
-      .then(function() {
+      .then(function () {
         console.log("hello________________________________________ /n");
         res.redirect("/dog-owner");
 
@@ -181,12 +201,12 @@ module.exports = function (app) {
       });
   });
 
-  app.post("/edit", upload.single("dogImg"), function(req, res, next) {
+  app.post("/edit", upload.single("dogImg"), function (req, res, next) {
     db.Dog.update(req.body, {
       where: {
         id: req.body.id
       }
-    }).then(function(results) {
+    }).then(function (results) {
       res.json(results);
     });
   });

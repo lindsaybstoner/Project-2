@@ -1,0 +1,31 @@
+{{> navbar}}
+
+
+{{user.id}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+  // Global variables
+  const url = window.location.search;
+  let dogId;
+  console.log("URL", url);
+
+  // Get Dog Activities
+  if (url.indexOf("?dog_id") !== -1) {
+    // Get dog id 
+    dogId = url.split("=")[1];
+    console.log("Dog ID", dogId)
+
+    // Get walk data
+    $.get(`api/walks/${dogId}`, function (dogData) {
+      if (dogData) {
+        console.log("Dog Data", dogData);
+        // Isolate dog activity
+        dogData.forEach((dog) => {
+          console.log('activity', JSON.parse(dog.activity))
+        })
+      }
+    });
+  };
+
+</script>
