@@ -37,23 +37,28 @@ $(document).ready(function() {
   }
 
   function handleDogEdit() {
-    localStorage.setItem("dogData", "");
-    
+    /* localStorage.setItem("dogData", ""); */
+    localStorage.clear();
     /* if (updating) {
       newDog.id = dogId;
       updateDog(newDog);
     } */
-    var dogData = {
-      name: $("[data-name]").attr("data-name"),
-      breed: $("[data-breed]").attr("data-breed"),
-      age: $("[data-age]").attr("data-age"),
-      sex: $("[data-sex]").attr("data-sex"),
-      weight: $("[data-weight]").attr("data-weight")
+    let dogId = $(this).data("id");
+    console.log(dogId);
+  
+    let dogData = {
+      age: $(`ul[data-id="${dogId}"] :nth-child(1)`).attr("data-age"),
+      breed: $(`ul[data-id="${dogId}"] :nth-child(2)`).attr("data-breed"),
+      name: $(`.card-body[data-id="${dogId}"] h5`).attr("data-name"),
+      sex: $(`ul[data-id="${dogId}"] :nth-child(4)`).attr("data-sex"),
+      weight: $(`ul[data-id="${dogId}"] :nth-child(3)`).attr("data-weight")
     };
     localStorage.setItem("dogData", JSON.stringify(dogData));
 
     window.location.href = "/dog-form";
 
+    updateDog();
+    
   }
 
   /* $("#dogFormSubmit").on("click", function(event) {
