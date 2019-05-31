@@ -1,47 +1,31 @@
 <head>
-  <style>
+  {{!-- <style>
     #map {
       margin: auto;
       height: 500px;
       width: 60%;
     }
-  </style>
+  </style> --}}
 </head>
 
 {{> navbar}}
-<h1>Walk Dog Page</h1>
 
-{{!-- User Data --}}
-{{#if userId}}
-<h2>User Info</h2>
-<h4>First Name: {{userFirstName}}</h4>
-<h4>User ID: {{userId}}</h4>
-<h4>User Email: {{userEmail}}</h4>
-{{else}}
-<p>Not logged-in <a href='/'>Log In</a></p>
-{{/if}}
-<br>
-<h2>Dog Info</h2>
-<h4 id="dog-id"></h4>
-<h4 id="dog-name"></h4>
-<br>
-<div id="timer-container">
-  <h2>Walking Timer</h2>
+<h1 class="welcome-header">Taking <span class="dog-title"></span> out!</h1>
 
-  <div id="display-timer">00:00</div>
+<div class="dog-walk-grid-container">
 
-  <div id="timer-buttons-container">
-    <button id="start">Start</button>
-    <button id="pause">Pause</button>
-    <button id="stop">Stop</button>
-    <button id="reset">Reset</button>
-    {{!-- <button id="mark">Mark</button> --}}
-  </div>
-</div>
-<br>
-
-<br>
- <div id="notes-container">
+  <div class="timer-and-map">
+    <div id="timer-container" class="timer-container">
+      <h2>Walking Timer</h2>
+      <div id="display-timer">00:00</div>
+      <div id="timer-buttons-container">
+        <button id="start">Start</button>
+        <button id="pause">Pause</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+        {{!-- <button id="mark">Mark</button> --}}
+      </div>
+      <div id="notes-container" class="notes-container">
         <form>
           <div class="form-group">
             <label for="note-input">Notes</label>
@@ -49,30 +33,31 @@
           </div>
         </form>
       </div>
-{{!-- Store walk in database --}}
-<div id="submit-walk-conatiner">
-  <button id="submit-walk" type="button" class="btn btn-info btn-lg">Submit Walk</button>
-</div>
-<br>
-<br>
-<div id="map-container">
-  <h2>Activity Map</h2>
-  <h3>buttons or icons</h3>
-  <div id="activity-buttons-container">
-    <button id="red" type="button" class="btn btn-danger">Red</button>
-    <button id="green" type="button" class="btn btn-success">Green</button>
-    <button id="blue" type="button" class="btn btn-primary">Blue</button>
-    <button id="yellow" type="button" class="btn btn-warning">Yellow</button>
+      <div id="submit-walk-container" class="submit-walk-container">
+        <button id="submit-walk" type="button" class="btn btn-lg submit-button">Submit Walk</button>
+      </div>
+    </div>
   </div>
-  <br>
-  <!--The div element for displaying the map -->
-  <div id="map"></div>
+
+  <div id="map-container" class="map">
+    <h2>Activity Map</h2>
+    <div id="activity-buttons-container">
+      <button id="red" type="button" class="btn"><i class="fas fa-poo"></i></button>
+      <button id="green" type="button" class="btn"><i class="fas fa-shopping-bag"></i></button>
+      <button id="blue" type="button" class="btn"><i class="fas fa-home"></i></button>
+      <button id="yellow" type="button" class="btn"><i class="fas fa-dog"></i></button>
+    </div>
+    <br>
+    <!--The div element for displaying the map -->
+    <div id="map"></div>
+  </div>
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 {{!-- Put JavaScript code on separate file --}}
 {{!-- <script type="text/javascript" src="js/signup.js"></script> --}}
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZlJZI6QLG4nL7RtUntrZdjXqhoLd7UF4">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZlJZI6QLG4nL7RtUntrZdjXqhoLd7UF4&callback=initMap">
 </script>
 <script type="text/javascript">
 
@@ -270,7 +255,7 @@
   $("#yellow").on("click", function () {
     console.log("on click red")
     // Invoke getCoordinates;
-    getCoordinates("beachflag")
+    getCoordinates("yellow")
   });
 
   // store walk details
@@ -314,11 +299,11 @@
         // Populate site
         $("#dog-id").text(`Dog Id: ${dogData.id}`)
         $("#dog-name").text(`Dog Name: ${dogData.name}`)
+        $(".dog-title").text(`${dogData.name}`)
       }
     });
   };
 
-
-
+  getCoordinates();
 
 </script>

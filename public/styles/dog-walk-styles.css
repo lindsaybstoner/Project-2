@@ -1,0 +1,51 @@
+.dog-walk-grid-container {
+    display: flex;
+    max-width: 90%;
+    margin: auto;
+    margin-top: 8%;
+}
+
+.timer-and-map {
+    display: flex;
+    flex-direction: column;
+    margin: 2%;
+    padding: 1%;
+}
+
+.map {
+    flex:1;
+    margin: 2%;
+    padding: 1%;
+}
+
+#map {
+    margin: auto;
+    height: 500px;
+    width: 100%;
+}
+
+#red {
+    background-color: #fd7467;
+}
+
+#green {
+    background-color: #00e74d;
+}
+
+#blue {
+    background-color: #6890fe;
+}
+
+#yellow {
+    background-color: #fdf569;
+}
+
+.submit-button {
+    background-color: #254452;
+    color: white;
+}
+
+.submit-button:hover {
+    background-color: white;
+    color: #254452;
+}

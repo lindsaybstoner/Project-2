@@ -38,6 +38,14 @@ p,a,div,span,nav {
     font-size: 3.4rem;
 }
 
+.landing-header {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    color: #254452;
+    font-size: 8.4rem;
+}
+
 .get-started-prompt,
 .login-prompt {
     color: white;
