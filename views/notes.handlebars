@@ -1,12 +1,12 @@
 {{>navbar}}
 
-{{userId}}
-
+<h3>Recent Notes</h3>
+<br>
 
 <div id="notes-display">
 {{#each Walk}}
 
-<p>{{this.createdAt}} note  {{this.note}}</p>
+<p>{{moment createdAt format="MMMM DD, YYYY"}} note  {{this.note}}</p>
 
 {{/each}}
 
