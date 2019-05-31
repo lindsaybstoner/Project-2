@@ -1,0 +1,30 @@
+{{>navbar}}
+
+{{userId}}
+
+
+<div id="notes-display">
+{{#each Walk}}
+
+<p>{{this.createdAt}} note  {{this.note}}</p>
+
+{{/each}}
+
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+
+    $.get("/api/notes", function(data) {
+      notes = data;
+      console.log(data);
+    });
+
+var
+
+
+</script>
