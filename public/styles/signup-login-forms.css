@@ -15,7 +15,6 @@
     position: absolute;
     top: -10%;
     left: -40%;
-    z-index: 2;
 }
 .signup-page-container .signup-form-container {
     padding: 125px;
@@ -55,3 +54,8 @@
     height: auto;
     opacity: 0.2;
 }
+
+/* signup form mobile styles */
+/* @media only screen and (max-width: 600px) {
+
+} */
