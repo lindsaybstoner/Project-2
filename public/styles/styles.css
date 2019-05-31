@@ -1,5 +1,10 @@
+body {
+    font-size: 1.2rem;
+}
+
 h1,h2,h3 {
     font-family: 'Poppins', sans-serif;
+    color: #254452;
 }
 
 p,a,div,span,nav {
@@ -9,44 +14,79 @@ p,a,div,span,nav {
 .flexContainer {
     display: flex;
     text-align: center;
+    flex-direction: column;
 }
 .flexCenter {
     justify-content: center;
 }
 .itemCenter {
-    align-items: center;
+    align-items: flex-start;
 }
 .fullHeight {
     height: 90vh;
 }
 .centerImage {
-    background: url('../img/landing.jpg') center;
+    background: url('../img/twopugs.jpg') center;
     background-size: cover;
 }
 
 .welcome-header {
     position: absolute;
-    top: 15%;
-    left: 10%;
-    color: #90812b;
-    opacity: 0.85;
+    top: 10%;
+    left: 5%;
+    color: #254452;
     font-size: 3.4rem;
+}
+
+.landing-header {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    color: #254452;
+    font-size: 8.4rem;
 }
 
 .get-started-prompt,
 .login-prompt {
     color: white;
-    margin: 10%;
+    margin-left: 40%;
+    margin-bottom: 10%;
 }
-
+.btn {
+    border: 1px solid #254452;
+    color: #254452;
+}
 .mission {
     display: flex;
     text-align: center;
     justify-content: center;
     flex-direction: column;
+    min-height: 50%;
+}
+.mission-flex-container {
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+}
+.mission-description,
+.mission-app-feature-list {
+    margin: auto;
+    padding: 2%;
+    width: 40%;
+}
+.mission-description {
+    flex:1;
+    font-size: 1.4rem;
+}
+.mission-app-feature-list ul {
+    list-style-type: none;
+    text-align: start;
+}
+.landing-taglines {
+    color: #254452;
+    margin-top: 2%;
 }
 
-.landing-taglines {
-    color: #90812b;
-    margin-top: 2%;
+img {
+    width: 35%;
 }

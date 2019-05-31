@@ -3,11 +3,59 @@
 .login-form-container {
     width: 50%;
     margin: auto;
-    margin-top: 15%;
+    margin-top: 12%;
+}
+
+/* signup form styles */
+.signup-page-container {
+    position: relative;
+    overflow: hidden;
+}
+.signup-page-container h1 {
+    position: absolute;
+    top: -10%;
+    left: -40%;
+}
+.signup-page-container .signup-form-container {
+    padding: 125px;
+    position: relative;
+    z-index: 2;
+} 
+.signup-page-container img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
 }
 
 
-/* signup form styles */
-
-
 /* login form styles */
+.login-page-container {
+    position: relative;
+    overflow: hidden;
+}
+.login-page-container h1 {
+    position: absolute;
+    top: -10%;
+    left: -40%;
+}
+.login-page-container .login-form-container {
+    padding: 125px;
+    position: relative;
+    z-index: 2;
+} 
+.login-page-container img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0.2;
+}
+
+/* signup form mobile styles */
+/* @media only screen and (max-width: 600px) {
+
+} */

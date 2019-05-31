@@ -2,31 +2,32 @@
 
 <h1 class="welcome-header">Hi, {{userFirstName}}!</h1>
 
-<div class="card dogs-card">
-    {{#each Dog}}
-    <h3>Your dogs</h3>
-    <a href="/dog-form" id="orgDogForm">Add a dog</a>
-    <img src="{{this.image}}" class="card-img-top" alt="...">
-    <div class="card-body" data-id="{{this.id}}">
-        <h5 class="card-title" data-name="{{this.name}}">Name: {{this.name}}</h5>
+<div class="dog-page-wrapper">
+    <div class="add-dog-link">
+        <a href="/dog-form">Add a dog</a>
     </div>
-    <ul class="list-group list-group-flush" data-id="{{this.id}}">
-        <li class="list-group-item" data-age="{{this.age}}">Age: {{this.age}}</li>
-        <li class="list-group-item" data-breed="{{this.breed}}">Breed: {{this.breed}}</li>
-        <li class="list-group-item" data-weight="{{this.weight}}">Weight: {{this.weight}}</li>
-        <li class="list-group-item" data-sex="{{this.sex}}">Sex: {{this.sex}}</li>
-        {{!-- <li class="list-group-item">Dog Walker: {{this.walker}}</li> --}}
-    </ul>
-    <div class="card-body">
-        <a href="/walk-dog?dog_id={{this.id}}" class="card-link"><button type="button" class="btn btn-outline-dark"><strong>Take
-                For A
-                Walk</strong> <i class="fas fa-walking leftspace"></i></button></a>
-        <a href="/walks" class="card-link"><button type="button" class="btn btn-outline-dark"><strong>Recent Walks</strong> 
-                <i class="fas fa-shoe-prints leftspace"></i></button></a>
-        <button type="button" class="edit btn btn-outline-dark" data-id="{{id}}"><strong>Edit Dog</strong> <i class="fas fa-edit"></i></button>
-        <button type="button" class="delete btn btn-outline-danger" data-id="{{id}}"><strong>Delete Dog</strong> <i class="fas fa-trash-alt"></i></button>
+    <div class="card dogs-card">
+        {{#each Dog}}
+        <img src="{{this.image}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Name: {{this.name}}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Age: {{this.age}}</li>
+            <li class="list-group-item">Breed: {{this.breed}}</li>
+            <li class="list-group-item">Weight: {{this.weight}}</li>
+            <li class="list-group-item">Gender: {{this.sex}}</li>
+            {{!-- <li class="list-group-item">Dog Walker: {{this.walker}}</li> --}}
+        </ul>
+        <div class="card-body">
+            <a href="/walk-dog?dog_id={{this.id}}" class="card-link"><button type="button" class="btn btn-outline-dark">Take
+                    For A
+                    Walk <i class="fas fa-walking leftspace"></i></button></a>
+            <a href="/walks" class="card-link"><button type="button" class="btn btn-outline-dark">Recent Walks
+                    <i class="fas fa-shoe-prints leftspace"></i></button></a>
+        </div>
+        {{/each}}
     </div>
-    {{/each}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/dog-form.js"></script>

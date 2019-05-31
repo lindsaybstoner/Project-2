@@ -1,5 +1,25 @@
+
+.dog-page-wrapper {
+    width: 85%;
+    margin: auto;
+}
+
 .dogs-card {
     width: 50%;
     margin: auto;
-    margin-top: 15%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.dogs-card img {
+    width: 80%;
+    border-radius: 50%;
+    margin: auto;
+}
+
+.add-dog-link {
+    font-size: 1rem;
+    position: absolute;
+    top: 20%;
+    left: 5%;
 }
