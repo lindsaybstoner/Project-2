@@ -23,6 +23,7 @@
             <input type="text" class="form-control" id="dog-weight" name="weight" placeholder="Enter weight...">
         </div>
         <input type="file" name="dogImg" />
+        <div id="errorMsg"></div>
         <button type="submit" id="dogFormSubmit" class="btn btn-default">Submit</button>
         <br />
         <br />
@@ -32,3 +33,23 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="js/dog-form.js"></script>
+<script>
+
+
+
+    if (localStorage.getItem("dogData")){
+
+        $("#dog-name").val(JSON.parse(localStorage.getItem("dogData")).name);
+        $("#dog-breed").val(JSON.parse(localStorage.getItem("dogData")).breed);
+        $("#dog-age").val(JSON.parse(localStorage.getItem("dogData")).age);
+        $("#dog-sex").val(JSON.parse(localStorage.getItem("dogData")).sex);
+        $("#dog-weight").val(JSON.parse(localStorage.getItem("dogData")).weight);
+
+        $(".dog-form").attr("action", "/edit");
+        //$(".dog-form").attr("method", "put");
+        
+    }
+
+
+
+</script>

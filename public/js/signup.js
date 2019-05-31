@@ -10,7 +10,7 @@ $(document).ready(function() {
   var addressOneInput = $("input#address-one-input");
   var addressTwoInput = $("input#address-two-input");
   var cityInput = $("input#city-input");
-  var stateInput = $("input#state-input");
+  var stateInput = $("#state-input");
   var zipInput = $("input#zip-input");
 
   // When the signup button is clicked, we validate the email and password are not blank

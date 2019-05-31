@@ -233,7 +233,7 @@
   };
 
   // Activity buttons code
-  $("#red").on("click", function () {
+  $("#red").on("click", function (e) {
     console.log("on click red")
     // Invoke getCoordinates;
     getCoordinates("red");
@@ -304,6 +304,7 @@
     });
   };
 
+  // initiate map when using goes to "walk-dog" page
   getCoordinates();
 
 </script>

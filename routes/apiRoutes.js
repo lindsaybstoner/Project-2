@@ -115,7 +115,7 @@ module.exports = function (app) {
       activity: req.body.activity,
       UserId: req.user.id,
       DogId: req.body.dogId,
-      note: req.user.id
+      note: req.body.note
     })
       .then(function (results) {
         res.json(results);
@@ -129,24 +129,10 @@ module.exports = function (app) {
 
   // Notes GET route
   app.get("/api/notes", function(req, res) {
-    // findAll returns all entries for a table when used with no options
-    db.Note.findAll({}).then(function(results) {
-      // We have access to the todos as an argument inside of the callback function
-      res.json(results);
-    });
-  });
-
-  // Notes POST route
-  app.post("/api/notes", function(req, res) {
-    console.log(req.body);
-    // create takes an argument of an object describing the item we want to
-    // insert into our table. In this case we just we pass in an object with a text
-    // and complete property (req.body)
-    db.Note.create({
-      text: req.body.text,
-      complete: req.body.complete
-    }).then(function(results) {
-      // We have access to the new todo as an argument inside of the callback function
+    db.Walk.findAll({
+      where: {
+        id: req.user.id
+      }}).then(function (results) {
       res.json(results);
     });
   });
@@ -159,25 +145,20 @@ module.exports = function (app) {
   });
 
   // Get individual dog data
-  app.get("/api/dog_data/:dogId", function (req, res) {
+  /* app.get("/api/dog_data/:dogId", function(req, res) {
     db.Dog.findOne({
       where: {
         id: req.params.dogId
       }
       // include walk tabel?
-    }).then(function (results) {
+    }).then(function(results) {
       console.log(results);
       res.json(results);
     });
-  });
+  }); */
 
   //get all the dog information from the form and put it in the database
-  app.post("/profile", upload.single("dogImg"), function (req, res, next) {
-    console.log("______________________________");
-    console.log(req.body);
-    console.log("______________________________");
-    console.log(req.file);
-    console.log("______________________________");
+  app.post("/profile", upload.single("dogImg"), function(req, res, next) {
     db.Dog.create({
       // req.body has all the text information on it
       name: req.body.name,
@@ -190,11 +171,41 @@ module.exports = function (app) {
       UserId: req.user.id
     })
       .then(function() {
+        console.log("hello________________________________________ /n");
         res.redirect("/dog-owner");
+
       })
       .catch(function (err) {
         console.log(err);
         res.json(err);
       });
+  });
+
+  app.post("/edit", upload.single("dogImg"), function(req, res, next) {
+    db.Dog.update(req.body, {
+      where: {
+        id: req.body.id
+      }
+    }).then(function(results) {
+      res.json(results);
+    });
+  });
+
+  // Delete a dog by its id
+  app.delete("/api/dog_data/:id", function (req, res) {
+    db.Dog.destroy({ where: { id: req.params.id } }).then(function (results) {
+      res.json(results);
+    });
+  });
+
+  // PUT route for updating dogs
+  app.put("/api/dog_data/:id", function (req, res) {
+    db.Dog.update(req.body, {
+      where: {
+        id: req.body.id
+      }
+    }).then(function (results) {
+      res.json(results);
+    });
   });
 };
