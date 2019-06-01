@@ -165,7 +165,7 @@ module.exports = function (app) {
   });
 
   // Get individual dog data
-  /* app.get("/api/dog_data/:dogId", function(req, res) {
+   app.get("/api/dog_data/:dogId", function(req, res) {
     db.Dog.findOne({
       where: {
         id: req.params.dogId
@@ -175,7 +175,7 @@ module.exports = function (app) {
       console.log(results);
       res.json(results);
     });
-  }); */
+  }); 
 
   //get all the dog information from the form and put it in the database
   app.post("/profile", upload.single("dogImg"), function (req, res, next) {

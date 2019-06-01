@@ -106,11 +106,11 @@
     if (dogData) {
       // Isolate dog activity
       dogData.forEach((dog) => {
-        let bagData = JSON.parse(dog.activity)
-        bagData.forEach((bag) => {
-          if (bag.activity === 'green') {
+        let dogData = JSON.parse(dog.activity)
+        dogData.forEach((data) => {
+          if (data.activity === 'green') {
             freeBagArray.push([
-              bag.activity, bag.lat, bag.lng
+              "Free Bags", data.lat, data.lng
             ])
           }
         })
@@ -125,14 +125,13 @@
     if (dogData) {
       // Isolate dog activity
       dogData.forEach((dog) => {
-        let bagData = JSON.parse(dog.activity)
-        bagData.forEach((bag) => {
-          if (bag.activity === 'red') {
+        let dogData = JSON.parse(dog.activity)
+        dogData.forEach((data) => {
+          if (data.activity === 'red') {
             dogBusinessArray.push([
-              bag.activity, bag.lat, bag.lng
+              "Pooped!", data.lat, data.lng
             ])
           }
-
         })
       })
       console.log('the dog business array', dogBusinessArray);
@@ -154,7 +153,7 @@
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(freeBagArray[i][1], freeBagArray[i][2]),
         map: map,
-        title: freeBagArray[i][0],
+        title: "Doggy Bags",
         icon: "/assets/plastic-bag-dot.png",
         animation: google.maps.Animation.DROP
       });
@@ -188,7 +187,7 @@
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(dogBusinessArray[i][1], dogBusinessArray[i][2]),
         map: map,
-        title: dogBusinessArray[i][0],
+        title: "Pooped!",
         icon: "/assets/poo-dot.png",
         animation: google.maps.Animation.DROP
 

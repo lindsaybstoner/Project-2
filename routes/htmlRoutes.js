@@ -103,7 +103,9 @@ module.exports = function (app) {
   // Dog Stats Page
   app.get("/dog-stats", isAuthenticated, function (req, res) {
     res.render("dog-stats", {
-      msg: "Welcome"
+      userId: req.user.id,
+      userEmail: req.user.email,
+      userFirstName: req.user.firstName
     });
   });
 
