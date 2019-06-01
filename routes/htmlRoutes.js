@@ -79,7 +79,6 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, "../public/dog-owner.html"));
   });
 
-
   // Walking Dog Page
   app.get("/walk-dog", isAuthenticated, function (req, res) {
     res.render("walk-dog", {
@@ -102,7 +101,7 @@ module.exports = function (app) {
   });
 
   // Dog Stats Page
-  app.get("/dog-stats", function (req, res) {
+  app.get("/dog-stats", isAuthenticated, function (req, res) {
     res.render("dog-stats", {
       msg: "Welcome"
     });
