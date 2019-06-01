@@ -45,12 +45,10 @@
   if (url.indexOf("?dog_id") !== -1) {
     // Get dog id
     dogId = url.split("=")[1];
-    console.log("Dog ID", dogId);
 
     // Get walk data
     $.get(`api/walks/${dogId}`, function (dogData) {
       if (dogData) {
-        console.log("Dog Data", dogData);
         // Isolate dog activity
         dogData.forEach((dog) => {
           console.log('activity', JSON.parse(dog.activity))
@@ -92,7 +90,6 @@
   // Get walk data - time and date
   $.get(`api/walks/${dogId}`, function (dogData) {
     if (dogData) {
-      console.log("Dog Data", dogData);
       dogData.forEach((dog) => {
         console.log("Time", parseInt(dog.time));
         console.log("Date", moment(dog.createdAt).format("YYYY, MM, DD hh:mm"));
@@ -111,14 +108,11 @@
   // Dog stats maps - free bags
   $.get(`api/walks/${dogId}`, function (dogData) {
     if (dogData) {
-      console.log("Dog Data", dogData);
       // Isolate dog activity
       dogData.forEach((dog) => {
         let bagData = JSON.parse(dog.activity)
-        console.log('free bags activity', bagData)
         bagData.forEach((bag) => {
           if (bag.activity === 'green') {
-            console.log('true bag', bag)
             freeBagArray.push([
               bag.activity, bag.lat, bag.lng
             ])
@@ -133,14 +127,11 @@
   // Dog stats maps - business
   $.get(`api/walks/${dogId}`, function (dogData) {
     if (dogData) {
-      console.log("Dog Data", dogData);
       // Isolate dog activity
       dogData.forEach((dog) => {
         let bagData = JSON.parse(dog.activity)
-        console.log('free bags activity', bagData)
         bagData.forEach((bag) => {
           if (bag.activity === 'red') {
-            console.log('true bag', bag)
             dogBusinessArray.push([
               bag.activity, bag.lat, bag.lng
             ])
@@ -163,12 +154,11 @@
 
     // Loop through the markerLocations array - add markers to the map
     for (let i = 0; i < freeBagArray.length; i++) {
-      console.log('**in the map loop')
       marker = new google.maps.Marker({
         position: new google.maps.LatLng(freeBagArray[i][1], freeBagArray[i][2]),
         map: map,
         title: freeBagArray[i][0],
-        icon: "/assets/plastic-bag.png",
+        icon: "/assets/plastic-bag-dot.png",
         animation: google.maps.Animation.DROP
       });
 
@@ -187,7 +177,6 @@
     map.fitBounds(bounds)
   };
 
-
   // Dog Business map
   function initMapTwo() {
     let markers = [];
@@ -203,7 +192,7 @@
         position: new google.maps.LatLng(dogBusinessArray[i][1], dogBusinessArray[i][2]),
         map: map,
         title: dogBusinessArray[i][0],
-        icon: "/assets/poo.png",
+        icon: "/assets/poo-dot.png",
         animation: google.maps.Animation.DROP
 
       });
