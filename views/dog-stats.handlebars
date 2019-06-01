@@ -1,30 +1,29 @@
 <head>
-  <style>
-    .map {
-      margin: auto;
-      height: 500px;
-      width: 60%;
-    }
-  </style>
+
 </head>
 
 {{> navbar}}
 <br>
 <br>
-<div id="outter">
-  <div id="chartContainer" style="height: 300px; width: 80%;"></div>
-</div>
+<div id="content">
+  <div id="chart-wrapper">
+    <div id="chartContainer" style="height: 300px; width: 80%;"></div>
+  </div>
+  <br>
+  <br>
+  <h2>Free Bags Map</h2>
+  <div id="map-one-container">
+    <div id="map-one" class="map"></div>
+  </div>
+  <br>
+  <br>
+  <h2>Dog Business Map</h2>
+  <div id="map-two-container">
+    <div id="map-two" class="map"></div>
+  </div>
 
-<h2>Free Bags Map</h2>
-<div id="map-one-container">
-  <div id="map-one" class="map"></div>
 </div>
-
-<h2>Dog Business Map</h2>
-<div id="map-two-container">
-  <div id="map-two" class="map"></div>
-</div>
-
+<br>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -38,6 +37,7 @@
   console.log("URL", url);
   // Chart variables
   let dataPointsWalk = [];
+  // Map variables
   let freeBagArray = [];
   let dogBusinessArray = [];
 
@@ -51,11 +51,10 @@
       if (dogData) {
         // Isolate dog activity
         dogData.forEach((dog) => {
-          console.log('activity', JSON.parse(dog.activity))
+          //console.log('activity', JSON.parse(dog.activity))
         })
       }
     });
-
   };
 
 </script>
@@ -83,7 +82,6 @@
       yValueFormatString: "##0.## mins",
       // x = date, y = time
       dataPoints: dataPointsWalk,
-
     }]
   });
 
@@ -91,8 +89,6 @@
   $.get(`api/walks/${dogId}`, function (dogData) {
     if (dogData) {
       dogData.forEach((dog) => {
-        console.log("Time", parseInt(dog.time));
-        console.log("Date", moment(dog.createdAt).format("YYYY, MM, DD hh:mm"));
         let date = moment(dog.createdAt).format("YYYY, MM, DD hh:mm")
         dataPointsWalk.push({
           x: new Date(date),
@@ -117,9 +113,9 @@
               bag.activity, bag.lat, bag.lng
             ])
           }
-          console.log('the free bag array', freeBagArray)
         })
       })
+      console.log('the free bag array', freeBagArray)
     };
     initMapOne()
   });
@@ -136,9 +132,10 @@
               bag.activity, bag.lat, bag.lng
             ])
           }
-          console.log('the free bag array', dogBusinessArray);
+
         })
       })
+      console.log('the dog business array', dogBusinessArray);
     }
     initMapTwo()
   });
