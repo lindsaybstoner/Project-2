@@ -10,6 +10,7 @@ The app uses the following technologies:
  - **handlebars**
  - **sequelize**
  - **passport.js**
+ - **google maps**
 
 
 New users can create an account utilizing passport.js.
