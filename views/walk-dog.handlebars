@@ -1,13 +1,3 @@
-<head>
-  {{!-- <style>
-    #map {
-      margin: auto;
-      height: 500px;
-      width: 60%;
-    }
-  </style> --}}
-</head>
-
 {{> navbar}}
 
 <h1 class="welcome-header">Taking <span class="dog-title"></span> out!</h1>
@@ -57,8 +47,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 {{!-- Put JavaScript code on separate file --}}
 {{!-- <script type="text/javascript" src="js/signup.js"></script> --}}
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZlJZI6QLG4nL7RtUntrZdjXqhoLd7UF4&callback=initMap">
-</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZlJZI6QLG4nL7RtUntrZdjXqhoLd7UF4&callback=initMap">
+  </script>
 <script type="text/javascript">
 
   // Global variables
@@ -236,26 +227,26 @@
   $("#red").on("click", function (e) {
     console.log("on click red")
     // Invoke getCoordinates;
-    getCoordinates("red");
+    getCoordinates("poo");
 
   });
 
   $("#green").on("click", function () {
     console.log("on click red")
     // Invoke getCoordinates;
-    getCoordinates("green")
+    getCoordinates("plastic-bag")
   });
 
   $("#blue").on("click", function () {
     console.log("on click red")
     // Invoke getCoordinates;
-    getCoordinates("blue")
+    getCoordinates("pet-shop")
   });
 
   $("#yellow").on("click", function () {
     console.log("on click red")
     // Invoke getCoordinates;
-    getCoordinates("yellow")
+    getCoordinates("friendly-dog-2")
   });
 
   // store walk details
@@ -267,13 +258,12 @@
     let walkActivity = activityObject;
     let noteInput = $("#note-input").val().trim()
 
-
     // Walk Object
     let addWalk = {
       time: walkTime,
       activity: JSON.stringify(activityObject),
       dogId: parseInt(dogId),
-      note: JSON.stringify(noteInput) 
+      note: JSON.stringify(noteInput)
     };
     console.log("2")
     console.log('Final Walk Object', addWalk)
@@ -289,13 +279,13 @@
 
   // Get Dog id 
   if (url.indexOf("?dog_id") !== -1) {
+    console.log('url', url)
     dogId = url.split("=")[1];
     console.log("Dog ID", dogId)
 
     // Get Dog data by dog id
     $.get(`/api/dog_data/${dogId}`, function (dogData) {
       if (dogData) {
-        console.log("Dog Data", dogData);
         // Populate site
         $("#dog-id").text(`Dog Id: ${dogData.id}`)
         $("#dog-name").text(`Dog Name: ${dogData.name}`)

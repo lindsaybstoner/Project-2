@@ -1,0 +1,210 @@
+<head>
+
+</head>
+
+{{> navbar}}
+<br>
+<br>
+<div id="content">
+  <div id="chart-wrapper">
+    <div id="chartContainer" style="height: 300px; width: 80%;"></div>
+  </div>
+  <br>
+  <br>
+  <h2>Free Doggy Bags Map</h2>
+  <div id="map-one-container">
+    <div id="map-one" class="map"></div>
+  </div>
+  <br>
+  <br>
+  <h2>Dog Business Map</h2>
+  <div id="map-two-container">
+    <div id="map-two" class="map"></div>
+  </div>
+
+</div>
+<br>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZlJZI6QLG4nL7RtUntrZdjXqhoLd7UF4">
+</script>
+<script type="text/javascript">
+  // Global variables
+  const url = window.location.search;
+  let dogId;
+  console.log("URL", url);
+  // Chart variables
+  let dataPointsWalk = [];
+  // Map variables
+  let freeBagArray = [];
+  let dogBusinessArray = [];
+
+  // Get Dog Activities
+  if (url.indexOf("?dog_id") !== -1) {
+    // Get dog id
+    dogId = url.split("=")[1];
+
+    // Get walk data
+    $.get(`api/walks/${dogId}`, function (dogData) {
+      if (dogData) {
+        // Isolate dog activity
+        dogData.forEach((dog) => {
+          //console.log('activity', JSON.parse(dog.activity))
+        })
+      }
+    });
+  };
+
+</script>
+<script>
+  var chartTime = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+    title: {
+      text: "Lastest Dog Walks (recorded in minutes)"
+    },
+    axisX: {
+      title: "Date",
+      valueFormatString: "MMM DD"
+    },
+    axisY: {
+      title: "Time (minutes)"
+      // suffix: "%"
+    },
+    data: [{
+      type: "line",
+      name: "Dog Walk",
+      connectNullData: true,
+      //nullDataLineDashType: "solid",
+      xValueType: "date",
+      //xValueFormatString: "",
+      yValueFormatString: "##0.## mins",
+      // x = date, y = time
+      dataPoints: dataPointsWalk,
+    }]
+  });
+
+  // Get walk data - time and date
+  $.get(`api/walks/${dogId}`, function (dogData) {
+    if (dogData) {
+      dogData.forEach((dog) => {
+        let date = moment(dog.createdAt).format("YYYY, MM, DD hh:mm")
+        dataPointsWalk.push({
+          x: new Date(date),
+          y: parseInt(dog.time)
+        });
+      })
+    }
+    console.log('data point', dataPointsWalk)
+    // Render chart
+    chartTime.render();
+  });
+
+  // Dog stats maps - free bags
+  $.get(`api/walks/${dogId}`, function (dogData) {
+    if (dogData) {
+      // Isolate dog activity
+      dogData.forEach((dog) => {
+        let dogData = JSON.parse(dog.activity)
+        dogData.forEach((data) => {
+          if (data.activity === 'green') {
+            freeBagArray.push([
+              "Free Bags", data.lat, data.lng
+            ])
+          }
+        })
+      })
+      console.log('the free bag array', freeBagArray)
+    };
+    initMapOne()
+  });
+
+  // Dog stats maps - business
+  $.get(`api/walks/${dogId}`, function (dogData) {
+    if (dogData) {
+      // Isolate dog activity
+      dogData.forEach((dog) => {
+        let dogData = JSON.parse(dog.activity)
+        dogData.forEach((data) => {
+          if (data.activity === 'red') {
+            dogBusinessArray.push([
+              "Pooped!", data.lat, data.lng
+            ])
+          }
+        })
+      })
+      console.log('the dog business array', dogBusinessArray);
+    }
+    initMapTwo()
+  });
+
+  // Render free bag map
+  function initMapOne() {
+    let markers = [];
+    let infowindow = new google.maps.InfoWindow({});
+
+    map = new google.maps.Map(document.getElementById('map-one'));
+
+    let bounds = new google.maps.LatLngBounds();
+
+    // Loop through the markerLocations array - add markers to the map
+    for (let i = 0; i < freeBagArray.length; i++) {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(freeBagArray[i][1], freeBagArray[i][2]),
+        map: map,
+        title: "Doggy Bags",
+        icon: "/assets/plastic-bag-dot.png",
+        animation: google.maps.Animation.DROP
+      });
+
+      // For each marker - add an event listener to display the title when someone clicks on the marker
+      google.maps.event.addListener(marker, 'click', ((marker, i) => {
+        return function (event) {
+
+          infowindow.setContent(freeBagArray[i][0]);
+          infowindow.open(map, marker)
+        }
+      })(marker, i))
+      // take each restaurant's maker position to add coordinates to the bounds property
+      bounds.extend(marker.position);
+    }
+    // Set the viewpoint based on the give data
+    map.fitBounds(bounds)
+  };
+
+  // Dog Business map
+  function initMapTwo() {
+    let markers = [];
+    let infowindow = new google.maps.InfoWindow({});
+
+    map = new google.maps.Map(document.getElementById('map-two'));
+
+    let bounds = new google.maps.LatLngBounds();
+
+    // Loop through the markerLocations array - add markers to the map
+    for (let i = 0; i < dogBusinessArray.length; i++) {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(dogBusinessArray[i][1], dogBusinessArray[i][2]),
+        map: map,
+        title: "Pooped!",
+        icon: "/assets/poo-dot.png",
+        animation: google.maps.Animation.DROP
+
+      });
+
+      // For each marker - add an event listener to display the title when someone clicks on the marker
+      google.maps.event.addListener(marker, 'click', ((marker, i) => {
+        return function (event) {
+
+          infowindow.setContent(dogBusinessArray[i][0]);
+          infowindow.open(map, marker)
+        }
+      })(marker, i))
+      // take each restaurant's maker position to add coordinates to the bounds property
+      bounds.extend(marker.position);
+    }
+    // Set the viewpoint based on the give data
+    map.fitBounds(bounds)
+  };
+</script>
