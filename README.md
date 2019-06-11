@@ -18,7 +18,7 @@ The user has the ability to revisit notes from past walks and compare them on a 
 ## Built With
 * [Heroku](https://heroku.com) - Hosting and deployment 
 * [MySQL](https://www.mysql.com/) - Database
-* [Node.js](https://nodejs.org/en/) - JavaScript for backend
+* [Node.js](https://nodejs.org/en/) - Server side Javascript
 * [Express.js](https://expressjs.com/) - standard server framework for Node.js for building web applications and APIs
 * [Handlebars](https://handlebarsjs.com/) - templating engine
 * [Sequelize](http://docs.sequelizejs.com/) - ORM for Node.js
