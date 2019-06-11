@@ -1,4 +1,4 @@
-#Stroll -  A dog walking app
+# Stroll -  A dog walking app
 Stroll is a full stack web app to track your dog walks and store notes associated with every walk.
 
 ## Getting Started
