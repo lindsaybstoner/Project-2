@@ -1,7 +1,7 @@
 {{> navbar}}
 <h1 class="welcome-header">Tell us about your dog.</h1>
 <div class="add-dog-form">
-    <form class="dog-form" action="/profile" method="post" enctype="multipart/form-data">
+    <form id="dogForm" class="dog-form" action="/profile" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="dog-name">Name</label>
             <input type="text" class="form-control" id="dog-name" name="name" placeholder="Enter name...">
@@ -45,7 +45,41 @@
         $("#dog-sex").val(JSON.parse(localStorage.getItem("dogData")).sex);
         $("#dog-weight").val(JSON.parse(localStorage.getItem("dogData")).weight);
 
-        //$(".dog-form").attr("action", "/edit");
+        //$("#dogFormSubmit").attr("type", "/edit");
+
+        $('#dogForm').html(`<form class="dog-form" >
+        <div class="form-group">
+            <label for="dog-name">Name</label>
+            <input type="text" class="form-control" id="dog-name" name="name" placeholder="Enter name...">
+        </div>
+        <div class="form-group">
+            <label for="dog-breed">Breed</label>
+            <input type="text" class="form-control" id="dog-breed" name="breed" placeholder="Enter breed...">
+        </div>
+        <div class="form-group">
+            <label for="dog-age">Age</label>
+            <input type="text" class="form-control" id="dog-age" name="age" placeholder="Enter age...">
+        </div>
+        <div class="form-group">
+            <label for="dog-sex">Sex</label>
+            <input type="text" class="form-control" id="dog-sex" name="sex" placeholder="Enter sex...">
+        </div>
+        <div class="form-group">
+            <label for="dog-weight">Weight</label>
+            <input type="text" class="form-control" id="dog-weight" name="weight" placeholder="Enter weight...">
+        </div>
+        <input type="file" name="dogImg" />
+        <div id="errorMsg"></div>
+        <button type="submit" id="dogFormSubmit" class="btn btn-default">Submit</button>
+        <br />
+        <br />
+        <p><a href="/dog-owner">Cancel</a></p>
+    </form>`)
+
+        $("#dogFormSubmit").onsubmit = function(event){
+            console.log(event)
+        }
+
         //$(".dog-form").attr("method", "put");
         
     }
