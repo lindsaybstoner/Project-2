@@ -32,10 +32,10 @@ The user has the ability to revisit notes from past walks and compare them on a 
 * [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial) - used to draw table
 
 ## Authors
-* **Lindsay Stoner** - [lindsaybstoner](https://github.com/lindsaybstoner)
 * **Allegra Anka** - [allegraanka](https://github.com/allegraanka)
 * **Daniel Bauer** - [CB750](https://github.com/CB750)
 * **Frank Carlone** - [fcarlone](https://github.com/fcarlone)
+* **Lindsay Stoner** - [lindsaybstoner](https://github.com/lindsaybstoner)
 
 
 
