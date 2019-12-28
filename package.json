@@ -17,7 +17,7 @@
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.16.1",
-    "handlebars": "^4.1.2",
+    "handlebars": "^4.3.0",
     "helper-moment": "^0.2.0",
     "multer": "^1.4.1",
     "mysql2": "^1.6.4",
